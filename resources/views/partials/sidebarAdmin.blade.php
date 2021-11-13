@@ -22,7 +22,7 @@
         <!-- Nav items -->
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link {{($title === "admin-dashboard") ? 'aktif' : ''}}"
+            <a class="nav-link {{($title === 'admin-dashboard') ? 'aktif' : ''}}"
               href="{{ url('/admin/dashboard') }} ">
               <i class="iconify" data-icon="bx-bx-home-circle"></i>
               <span class="nav-link-text">Dashboard</span>
@@ -30,7 +30,7 @@
           </li>
 
           <li class="nav-item">
-            <div class="nav-link {{($title === "admin-master") ? 'aktif' : ''}}">
+            <div class="nav-link {{($title === 'admin-master') ? 'aktif' : ''}}">
               <i class="iconify" data-icon="bx:bx-user-pin"></i>
               <span class="nav-link-text">Master Data</span>
             </div>
@@ -124,25 +124,25 @@
           </li>
 
           <li class="nav-item">
-            <div class="nav-link {{($title === "admin-kuliah") ? 'aktif' : ''}}">
+            <div class="nav-link {{($title === 'admin-kuliah') ? 'aktif' : ''}}">
               <i class="iconify" data-icon="bx:bx-file-blank"></i>
               <span class="nav-link-text">Kuliah</span>
             </div>
             <ul class="nav-item-dropdown-content">
               <li class="nav-item">
-                <a class="nav-link {{($title === "rekap-absensi-mahasiswa") ? 'aktif' : ''}}" href="{{url('admin/kuliah/absensi/rekap')}}">
+                <a class="nav-link {{($title === 'rekap-absensi-mahasiswa') ? 'aktif' : ''}}" href="{{url('admin/kuliah/absensi/rekap')}}">
                   <span class="mini_icon">RA</span>
                   <span class="nav-link-text ml-0">Rekap Presensi Mahasiswa</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link {{($title === "rekap-absensi-dosen") ? 'aktif' : ''}}" href="{{url('admin/kuliah/absensi/dosen')}}">
+                <a class="nav-link {{($title === 'rekap-absensi-dosen') ? 'aktif' : ''}}" href="{{url('admin/kuliah/absensi/dosen')}}">
                   <span class="mini_icon">RD</span>
                   <span class="nav-link-text ml-0">Rekap Presensi Dosen</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link {{($title === "rekap-nilai") ? 'aktif' : ''}}" href="{{url('admin/kuliah/rekap-nilai')}}">
+                <a class="nav-link {{($title === 'rekap-nilai') ? 'aktif' : ''}}" href="{{url('admin/kuliah/rekap-nilai')}}">
                   <span class="mini_icon">RN</span>
                   <span class="nav-link-text ml-0">Rekap Nilai Mahasiswa</span>
                 </a>
@@ -152,7 +152,7 @@
 
 
           <li class="nav-item">
-            <div class="nav-link {{($title === "admin-keuangan") ? 'aktif' : ''}}">
+            <div class="nav-link {{($title === 'admin-keuangan') ? 'aktif' : ''}}">
             <span class=" iconify" data-icon="bx:bx-dollar-circle"></span>
               <span class="nav-link-text">Keuangan</span>
             </div>
@@ -164,13 +164,13 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link {{($title === "keuangan-tarif") ? 'aktif' : ''}}" href="{{ url('admin/keuangan/tarif') }} ">
+                <a class="nav-link {{($title === 'keuangan-tarif') ? 'aktif' : ''}}" href="{{ url('admin/keuangan/tarif') }} ">
                   <span class="mini_icon">TR</span>
                   <span class="nav-link-text">Tarif UKT & SPI</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link {{($title === "keuangan-rekapitulasi") ? 'aktif' : ''}}" href="{{ url('admin/keuangan/spi') }} ">
+                <a class="nav-link {{($title === 'keuangan-rekapitulasi') ? 'aktif' : ''}}" href="{{ url('admin/keuangan/spi') }} ">
                   <span class="mini_icon">SP</span>
                   <span class="nav-link-text">SPI</span>
                 </a>
@@ -191,7 +191,7 @@
           </li>
 
           <li class="nav-item">
-            <div class="nav-link {{($title === "admin-settingpmb") ? 'aktif' : ''}}">
+            <div class="nav-link {{($title === 'admin-settingpmb') ? 'aktif' : ''}}">
               <i class="iconify-inline" data-icon="ant-design:setting-outlined"></i>
               <span class="nav-link-text">Setting PMB</span>
             </div>
@@ -237,13 +237,115 @@
 
 
           <li class="nav-item">
-            <a class="nav-link {{($title === "admin-mahasiswa") ? 'aktif' : ''}}"
+            <a class="nav-link {{($title === 'admin-mahasiswa') ? 'aktif' : ''}}"
               href="{{ url('/admin/mahasiswa') }} ">
               <i class="iconify" data-icon="bx:bxs-user" data-inline="false"></i>
               <span class="nav-link-text">Mahasiswa</span>
             </a>
           </li>
-          <!-- ===================== -->
+          <!-- ==========FEEDER=========== -->
+
+            <li class="nav-item">
+            <a class="nav-link {{($title === 'admin-feeder') ? 'aktif' : ''}}"
+              href="{{ url('/admin/feeder') }} ">
+              <i class="iconify" data-icon="bx:bxs-data" data-inline="false"></i>
+              <span class="nav-link-text">Feeder</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link {{($title === 'admin-feeder') ? 'aktif' : ''}}"
+              href="{{ url('/admin/feeder-koneksi') }} ">
+              <i class="iconify" data-icon="bx:bxs-data" data-inline="false"></i>
+              <span class="nav-link-text">Feeder Koneksi</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {{($title === 'admin-feeder') ? 'aktif' : ''}}"
+              href="{{ url('/admin/feeder-jurusan') }} ">
+              <i class="iconify" data-icon="bx:bxs-data" data-inline="false"></i>
+              <span class="nav-link-text">Feeder Jurusan</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {{($title === 'admin-feeder') ? 'aktif' : ''}}"
+              href="{{ url('/admin/feeder-skala_nilai') }} ">
+              <i class="iconify" data-icon="bx:bxs-data" data-inline="false"></i>
+              <span class="nav-link-text">Feeder Skala Nilai</span>
+            </a>
+          </li>
+             <li class="nav-item">
+            <a class="nav-link {{($title === 'admin-feeder') ? 'aktif' : ''}}"
+              href="{{ url('/admin/feeder-data_mata_kuliah') }} ">
+              <i class="iconify" data-icon="bx:bxs-data" data-inline="false"></i>
+              <span class="nav-link-text">Feeder Data Mata Kuliah</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {{($title === 'admin-feeder') ? 'aktif' : ''}}"
+              href="{{ url('/admin/feeder-data_kurikulum') }} ">
+              <i class="iconify" data-icon="bx:bxs-data" data-inline="false"></i>
+              <span class="nav-link-text">Feeder Data Kurikulum</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {{($title === 'admin-feeder') ? 'aktif' : ''}}"
+              href="{{ url('/admin/feeder-data_mk_kurikulum') }} ">
+              <i class="iconify" data-icon="bx:bxs-data" data-inline="false"></i>
+              <span class="nav-link-text">Feeder Data MK Kurikulum</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {{($title === 'admin-feeder') ? 'aktif' : ''}}"
+              href="{{ url('/admin/feeder-data_mahasiswa') }} ">
+              <i class="iconify" data-icon="bx:bxs-data" data-inline="false"></i>
+              <span class="nav-link-text">Feeder Data Mahasiswa</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {{($title === 'admin-feeder') ? 'aktif' : ''}}"
+              href="{{ url('/admin/feeder-data_dosen') }} ">
+              <i class="iconify" data-icon="bx:bxs-data" data-inline="false"></i>
+              <span class="nav-link-text">Feeder Data Dosen</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {{($title === 'admin-feeder') ? 'aktif' : ''}}"
+              href="{{ url('/admin/feeder-data_kelas') }} ">
+              <i class="iconify" data-icon="bx:bxs-data" data-inline="false"></i>
+              <span class="nav-link-text">Feeder Data Kelas</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {{($title === 'admin-feeder') ? 'aktif' : ''}}"
+              href="{{ url('/admin/feeder-data_dosen_ajar') }} ">
+              <i class="iconify" data-icon="bx:bxs-data" data-inline="false"></i>
+              <span class="nav-link-text">Feeder Data Dosen Ajar</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {{($title === 'admin-feeder') ? 'aktif' : ''}}"
+              href="{{ url('/admin/feeder-data_krs') }} ">
+              <i class="iconify" data-icon="bx:bxs-data" data-inline="false"></i>
+              <span class="nav-link-text">Feeder Data KRS</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {{($title === 'admin-feeder') ? 'aktif' : ''}}"
+              href="{{ url('/admin/feeder-data_nilai') }} ">
+              <i class="iconify" data-icon="bx:bxs-data" data-inline="false"></i>
+              <span class="nav-link-text">Feeder Data Nilai</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {{($title === 'admin-feeder') ? 'aktif' : ''}}"
+              href="{{ url('/admin/feeder-data_akm') }} ">
+              <i class="iconify" data-icon="bx:bxs-data" data-inline="false"></i>
+              <span class="nav-link-text">Feeder Data AKM</span>
+            </a>
+          </li> 
+          <!-- ==========FEEDER=========== -->
+      
           
 
           

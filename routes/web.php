@@ -603,7 +603,76 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
             ]);
         });
     });
-    
+
+    Route::prefix('feeder')->group(function () {
+
+      Route::get('/feeder', function () {
+            return view('admin.feeder.feeder-koneksi', [
+                "title" => "admin-feeder"
+            ]);
+        });
+      Route::get('/feeder-jurusan', function () {
+            return view('admin.feeder.feeder-jurusan', [
+                "title" => "admin-feeder"
+            ]);
+        });
+      Route::get('/feeder-skala_nilai', function () {
+            return view('admin.feeder.feeder-skala_nilai', [
+                "title" => "admin-feeder"
+            ]);
+        });
+      Route::get('/feeder-data_mata_kuliah', function () {
+            return view('admin.feeder.feeder-data_mata_kuliah', [
+                "title" => "admin-feeder"
+            ]);
+        });
+      Route::get('/feeder-data_kurikulum', function () {
+            return view('admin.feeder.feeder-data_kurikulum', [
+                "title" => "admin-feeder"
+            ]);
+        });
+      Route::get('/feeder-data_mk_kurikulum', function () {
+            return view('admin.feeder.feeder-data_mk_kurikulum', [
+                "title" => "admin-feeder"
+            ]);
+        });
+      Route::get('/feeder-data_mahasiswa', function () {
+            return view('admin.feeder.feeder-data_mahasiswa', [
+                "title" => "admin-feeder"
+            ]);
+        });
+      Route::get('/feeder-data_dosen', function () {
+            return view('admin.feeder.feeder-data_dosen', [
+                "title" => "admin-feeder"
+            ]);
+        });
+      Route::get('/feeder-data_kelas', function () {
+            return view('admin.feeder.feeder-data_kelas', [
+                "title" => "admin-feeder"
+            ]);
+        });
+      Route::get('/feeder-data_dosen_ajar', function () {
+            return view('admin.feeder.feeder-data_dosen_ajar', [
+                "title" => "admin-feeder"
+            ]);
+        });
+      Route::get('/feeder-data_krs', function () {
+            return view('admin.feeder.feeder-data_krs', [
+                "title" => "admin-feeder"
+            ]);
+        });
+      Route::get('/feeder-data_nilai', function () {
+            return view('admin.feeder.feeder-data_nilai', [
+                "title" => "admin-feeder"
+            ]);
+        });
+      Route::get('/feeder-data_akm', function () {
+            return view('admin.feeder.feeder-data_akm', [
+                "title" => "admin-feeder"
+            ]);
+        });
+    });
+
     Route::prefix('report')->group(function () {
         Route::get('/cuti', function () {
             return view('akademik.report.reportcuti', [
@@ -648,9 +717,8 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
             ]);
         });
     });
-
-    
 });
+
 
 Route::prefix('keuangan')->middleware(['aksesuntuk:keuangan'])->group(function () {
     Route::get('/dashboard', function () {
@@ -757,6 +825,17 @@ Route::prefix('keuangan')->middleware(['aksesuntuk:keuangan'])->group(function (
             ]);
         });
     });
-});
+// Route::get('feeder-dikti/{act}', function ($act) {
+//     $data = new \App\Services\FeederDiktiApiService($act);
+//     $data->runWS();
+//     $response = $data->runWS();
+
+// foreach ($response['data'] as $key => $value) {
+
+//     dd($value);
+//        return view('admin.feeder.index',['data'=> $value]);
+// }
+
+// });
 
 require_once(__DIR__.'/web_slicing.php');
