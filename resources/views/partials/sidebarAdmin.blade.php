@@ -255,91 +255,91 @@
 
           <li class="nav-item">
             <a class="nav-link {{($title === 'admin-feeder') ? 'aktif' : ''}}"
-              href="{{ url('/admin/feeder-koneksi') }} ">
+              href="{{ url('/admin/feeder/feeder-koneksi') }} ">
               <i class="iconify" data-icon="bx:bxs-data" data-inline="false"></i>
               <span class="nav-link-text">Feeder Koneksi</span>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link {{($title === 'admin-feeder') ? 'aktif' : ''}}"
-              href="{{ url('/admin/feeder-jurusan') }} ">
+              href="{{ url('/admin/feeder/feeder-jurusan') }} ">
               <i class="iconify" data-icon="bx:bxs-data" data-inline="false"></i>
               <span class="nav-link-text">Feeder Jurusan</span>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link {{($title === 'admin-feeder') ? 'aktif' : ''}}"
-              href="{{ url('/admin/feeder-skala_nilai') }} ">
+              href="{{ url('/admin/feeder/feeder-skala_nilai') }} ">
               <i class="iconify" data-icon="bx:bxs-data" data-inline="false"></i>
               <span class="nav-link-text">Feeder Skala Nilai</span>
             </a>
           </li>
              <li class="nav-item">
             <a class="nav-link {{($title === 'admin-feeder') ? 'aktif' : ''}}"
-              href="{{ url('/admin/feeder-data_mata_kuliah') }} ">
+              href="{{ url('/admin/feeder/feeder-data_mata_kuliah') }} ">
               <i class="iconify" data-icon="bx:bxs-data" data-inline="false"></i>
               <span class="nav-link-text">Feeder Data Mata Kuliah</span>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link {{($title === 'admin-feeder') ? 'aktif' : ''}}"
-              href="{{ url('/admin/feeder-data_kurikulum') }} ">
+              href="{{ url('/admin/feeder/feeder-data_kurikulum') }} ">
               <i class="iconify" data-icon="bx:bxs-data" data-inline="false"></i>
               <span class="nav-link-text">Feeder Data Kurikulum</span>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link {{($title === 'admin-feeder') ? 'aktif' : ''}}"
-              href="{{ url('/admin/feeder-data_mk_kurikulum') }} ">
+              href="{{ url('/admin/feeder/feeder-data_mk_kurikulum') }} ">
               <i class="iconify" data-icon="bx:bxs-data" data-inline="false"></i>
               <span class="nav-link-text">Feeder Data MK Kurikulum</span>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link {{($title === 'admin-feeder') ? 'aktif' : ''}}"
-              href="{{ url('/admin/feeder-data_mahasiswa') }} ">
+              href="{{ url('/admin/feeder/feeder-data_mahasiswa') }} ">
               <i class="iconify" data-icon="bx:bxs-data" data-inline="false"></i>
               <span class="nav-link-text">Feeder Data Mahasiswa</span>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link {{($title === 'admin-feeder') ? 'aktif' : ''}}"
-              href="{{ url('/admin/feeder-data_dosen') }} ">
+              href="{{ url('/admin/feeder/feeder-data_dosen') }} ">
               <i class="iconify" data-icon="bx:bxs-data" data-inline="false"></i>
               <span class="nav-link-text">Feeder Data Dosen</span>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link {{($title === 'admin-feeder') ? 'aktif' : ''}}"
-              href="{{ url('/admin/feeder-data_kelas') }} ">
+              href="{{ url('/admin/feeder/feeder-data_kelas') }} ">
               <i class="iconify" data-icon="bx:bxs-data" data-inline="false"></i>
               <span class="nav-link-text">Feeder Data Kelas</span>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link {{($title === 'admin-feeder') ? 'aktif' : ''}}"
-              href="{{ url('/admin/feeder-data_dosen_ajar') }} ">
+              href="{{ url('/admin/feeder/feeder-data_dosen_ajar') }} ">
               <i class="iconify" data-icon="bx:bxs-data" data-inline="false"></i>
               <span class="nav-link-text">Feeder Data Dosen Ajar</span>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link {{($title === 'admin-feeder') ? 'aktif' : ''}}"
-              href="{{ url('/admin/feeder-data_krs') }} ">
+              href="{{ url('/admin/feeder/feeder-data_krs') }} ">
               <i class="iconify" data-icon="bx:bxs-data" data-inline="false"></i>
               <span class="nav-link-text">Feeder Data KRS</span>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link {{($title === 'admin-feeder') ? 'aktif' : ''}}"
-              href="{{ url('/admin/feeder-data_nilai') }} ">
+              href="{{ url('/admin/feeder/feeder-data_nilai') }} ">
               <i class="iconify" data-icon="bx:bxs-data" data-inline="false"></i>
               <span class="nav-link-text">Feeder Data Nilai</span>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link {{($title === 'admin-feeder') ? 'aktif' : ''}}"
-              href="{{ url('/admin/feeder-data_akm') }} ">
+              href="{{ url('/admin/feeder/feeder-data_akm') }} ">
               <i class="iconify" data-icon="bx:bxs-data" data-inline="false"></i>
               <span class="nav-link-text">Feeder Data AKM</span>
             </a>

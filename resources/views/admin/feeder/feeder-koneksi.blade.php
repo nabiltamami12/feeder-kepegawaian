@@ -1,14 +1,17 @@
 @extends('layouts.main')
 
 @section('content')
+
 <?php
-    $data = new \App\Services\FeederDiktiApiService('GetProfilPT');
-    $data->runWS();
-    $response = $data->runWS();
+$data = new \App\Services\FeederDiktiApiService("GetProfilPT");
+$data->runWS();
+$response = $data->runWS();
+
+
 
 foreach ($response['data'] as $key => $value) {
+    // dd($response);
 
-    dd($value);
        // return view('admin.feeder.index',['data'=> $value]);
 }
 ?>
@@ -25,64 +28,93 @@ foreach ($response['data'] as $key => $value) {
         <div class="card-header p-0 m-0 border-0">
           <div class=" row align-items-center">
             <div class="col">
-              <h2 class="mb-0">Data Jurusan</h2>
+                <?php
+            foreach ($response['data'] as $key => $value) {
+  
+              $token = $value['id_perguruan_tinggi'];
+
+            if($token == "")
+            {
+              echo '
+              <div class="callout callout-danger">
+              <h4>STATUS FEEDER : BELUM TERKONEKSI</h4>
+              </div>
+              ';
+            }
+            else
+            {
+              echo '
+              <div class="callout callout-success">
+              <h4>STATUS FEEDER : TERKONEKSI</h4>
+              </div>
+              ';
+            }
+          }
+            ?>  
             </div>
             <div class="col text-right">
 
-     <!--          <button type="button" onclick="add_btn()" class="btn btn-primary "><i class="iconify-inline mr-1" data-icon='bx:bx-plus-circle'></i>Tambah</button> -->
+             <!--          <button type="button" onclick="add_btn()" class="btn btn-primary "><i class="iconify-inline mr-1" data-icon='bx:bx-plus-circle'></i>Tambah</button> -->
 
+           </div>
+         </div>
+
+         <hr class="mt">
+       </div>
+
+       <div class="table-responsive">
+        <table id="datatable" class="table align-items-center table-flush table-borderless table-hover">
+          <thead class="table-header">
+
+
+            <tr>
+             <div class="box box-primary">
+
+              <form role="form" action="" method="POST">
+                @foreach($response['data'] as $key => $value)    
+                <div class="box-body">
+
+                  <div class="form-group">
+                    <label>ID Perguruan Tinggi</label>
+                    <input type="text" name="id" value="<?php echo $value['id_perguruan_tinggi']; ?>" class="form-control" readonly autofocus>
+                  </div>
+                  <div class="form-group">
+                    <label>Username Feeder</label>
+                    <input type="text" name="username" value="<?php echo  env('feeder_username'); ?>" class="form-control" autofocus required>
+                  </div>
+                  <div class="form-group">
+                    <label>Password Feeder</label>
+                    <input type="text" name="password" value="<?php echo env('feeder_password'); ?>" class="form-control" required>
+                  </div>
+                  <div class="form-group">
+                    <label>URL Feeder</label>
+                    <input type="text" name="url" value="<?php echo substr(env('feeder_url'),7,12) ; ?>" class="form-control" required>
+                  </div>
+                  <div class="form-group">
+                    <label>PORT</label>
+                    <input type="text" name="port" value="8082" class="form-control" required>
+                  </div>
+                  <div class="form-group">
+                    <label>Kode Perguruan Tinggi</label>
+                    <input type="text" name="kodept" value="<?php echo $value['kode_perguruan_tinggi'] ; ?>" class="form-control" required>
+                  </div>
+                </div>
+                @endforeach
+
+                <div class="box-footer pt-5 ml-4">
+                  <button type="submit" name="konek" class="btn btn-danger"><i class="fa fa-retweet"></i> UPDATE KONEKSI</button>
+                </div>
+              </form>
             </div>
-          </div>
-
-          <hr class="mt">
+          </section>
         </div>
+      </tr>
+    </thead>
+    <tbody>
 
-        <div class="table-responsive">
-          <table id="datatable" class="table align-items-center table-flush table-borderless table-hover">
-            <thead class="table-header">
-              <tr>
-               <div class="box box-primary">
-                <form role="form" action="" method="POST">
-                  <div class="box-body">
-                    <div class="form-group">
-                      <label>ID Perguruan Tinggi</label>
-                      <input type="text" name="id" value="<?php echo $id ?>" class="form-control" readonly autofocus>
-                    </div>
-                    <div class="form-group">
-                      <label>Username Feeder</label>
-                      <input type="text" name="username" value="<?php echo $feed["username"]; ?>" class="form-control" autofocus required>
-                    </div>
-                    <div class="form-group">
-                      <label>Password Feeder</label>
-                      <input type="text" name="password" value="<?php echo $feed["password"]; ?>" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                      <label>URL Feeder</label>
-                      <input type="text" name="url" value="<?php echo $feed["url"]; ?>" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                      <label>PORT</label>
-                      <input type="text" name="port" value="<?php echo $feed["port"]; ?>" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                      <label>Kode Perguruan Tinggi</label>
-                      <input type="text" name="kodept" value="<?php echo $feed["kode_pt"]; ?>" class="form-control" required>
-                    </div>
-                  </div>
-                  <div class="box-footer">
-                    <button type="submit" name="konek" class="btn btn-danger"><i class="fa fa-retweet"></i> UPDATE KONEKSI</button>
-                  </div>
-                </form>
-              </div>
-            </section>
-          </div>
-        </tr>
-      </thead>
-      <tbody>
-
-      </tbody>
-    </table>
-  </div>
+    </tbody>
+  </table>
+</div>
 </div>
 </div>
 </div>
