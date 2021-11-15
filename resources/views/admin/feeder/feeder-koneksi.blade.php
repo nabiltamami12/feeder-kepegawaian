@@ -3,16 +3,17 @@
 @section('content')
 
 <?php
+
 $data = new \App\Services\FeederDiktiApiService("GetProfilPT");
 $data->runWS();
 $response = $data->runWS();
 
 
 
-foreach ($response['data'] as $key => $value) {
-    // dd($response);
+foreach($response['data'] as $key => $value) {
+    # dd($response);
 
-       // return view('admin.feeder.index',['data'=> $value]);
+       # return view('admin.feeder.index',['data'=> $value]);
 }
 ?>
 
