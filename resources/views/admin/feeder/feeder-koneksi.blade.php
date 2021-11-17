@@ -4,17 +4,65 @@
 
 <?php
 
+use App\Models\feeder\config_feeder;
+
+
+
 $data = new \App\Services\FeederDiktiApiService("GetProfilPT");
 $data->runWS();
 $response = $data->runWS();
+$token = $data->getToken();
+$data_config = config_feeder::all();
+
+    # dd( $response['data'][0]);
 
 
+$token = $token['data']['token'];
+$id = $response['data'][0]['id_perguruan_tinggi'];
 
-foreach($response['data'] as $key => $value) {
-    # dd($response);
+    # dd($token['data']['token']);
 
-       # return view('admin.feeder.index',['data'=> $value]);
+if(isset($_POST["konek"]))
+{
+
+              $username =  $_POST["username"];
+              $password = $_POST["password"];
+              $url = $_POST["url"];
+              $port =  $_POST["port"];
+
+  if (config_feeder::all()->count() > 0 ){
+
+      config_feeder::where('id',1)->update([
+            'username' => $_POST["username"],
+            'password' => $_POST["password"],
+            'url' => $_POST["url"],
+            'port' => $_POST["port"],
+            'kode_pt' => $_POST["kodept"],
+            'id_pt' => $_POST["id"],
+            'token' => $token['data']['token'],
+ 
+        ]);
+
+  }
+    
+  else{
+        
+        foreach($response['data']  as $key => $value)   {
+
+           config_feeder::create([
+                'username' => $username,
+                'password' => $password,
+                'url' => $url,
+                'port' => $port,
+                'kode_pt' => $value["kode_perguruan_tinggi"],
+                'id_pt' => $value["id_perguruan_tinggi"],
+                'token' => $token,
+         
+                ]);
+    }
+  }
 }
+
 ?>
 
 <!-- Header -->
@@ -71,37 +119,69 @@ foreach($response['data'] as $key => $value) {
             <tr>
              <div class="box box-primary">
 
+
               <form role="form" action="" method="POST">
-                @foreach($response['data'] as $key => $value)    
+              @csrf
+                @if (config_feeder::all()->count() > 0)
+              
+                @foreach($data_config as $key => $value) 
                 <div class="box-body">
 
                   <div class="form-group">
                     <label>ID Perguruan Tinggi</label>
-                    <input type="text" name="id" value="<?php echo $value['id_perguruan_tinggi']; ?>" class="form-control" readonly autofocus>
+                    <input type="text" name="id" value="<?php echo $value['id_pt']; ?>" class="form-control" readonly autofocus>
                   </div>
                   <div class="form-group">
                     <label>Username Feeder</label>
-                    <input type="text" name="username" value="<?php echo  env('feeder_username'); ?>" class="form-control" autofocus required>
+                    <input type="text" name="username" value="<?php echo  $value['username']; ?>" class="form-control" autofocus required>
                   </div>
                   <div class="form-group">
                     <label>Password Feeder</label>
-                    <input type="text" name="password" value="<?php echo env('feeder_password'); ?>" class="form-control" required>
+                    <input type="text" name="password" value="<?php echo $value['password']; ?>" class="form-control" required>
                   </div>
                   <div class="form-group">
                     <label>URL Feeder</label>
-                    <input type="text" name="url" value="<?php echo substr(env('feeder_url'),7,12) ; ?>" class="form-control" required>
+                    <input type="text" name="url" value="<?php echo $value['url']; ?>" class="form-control" required>
                   </div>
                   <div class="form-group">
                     <label>PORT</label>
-                    <input type="text" name="port" value="8082" class="form-control" required>
+                    <input type="text" name="port" value="<?php echo $value['port'] ; ?>" class="form-control" required>
                   </div>
                   <div class="form-group">
                     <label>Kode Perguruan Tinggi</label>
-                    <input type="text" name="kodept" value="<?php echo $value['kode_perguruan_tinggi'] ; ?>" class="form-control" required>
+                    <input type="text" name="kodept" value="<?php echo $value['kode_pt'] ; ?>" class="form-control" required>
                   </div>
                 </div>
+               
                 @endforeach
-
+                @else
+                <div class="box-body">
+                  <div class="form-group">
+                    <label>ID Perguruan Tinggi</label>
+                    <input type="text" name="id" value="<?php echo $id; ?>" class="form-control" readonly autofocus>
+                  </div>
+                  <div class="form-group">
+                    <label>Username Feeder</label>
+                    <input type="text" name="username" value="" class="form-control" autofocus required>
+                  </div>
+                  <div class="form-group">
+                    <label>Password Feeder</label>
+                    <input type="text" name="password" value="" class="form-control" required>
+                  </div>
+                  <div class="form-group">
+                    <label>URL Feeder</label>
+                    <input type="text" name="url" value="" class="form-control" required>
+                  </div>
+                  <div class="form-group">
+                    <label>PORT</label>
+                    <input type="text" name="port" value="" class="form-control" required>
+                  </div>
+                  <div class="form-group">
+                    <label>Kode Perguruan Tinggi</label>
+                    <input type="text" name="kodept" value="" class="form-control" required>
+                  </div>
+                </div>
+                @endif
                 <div class="box-footer pt-5 ml-4">
                   <button type="submit" name="konek" class="btn btn-danger"><i class="fa fa-retweet"></i> UPDATE KONEKSI</button>
                 </div>

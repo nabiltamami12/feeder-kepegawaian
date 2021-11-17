@@ -21,6 +21,30 @@ class FeederDiktiApiService {
         $this->act = $act;
     }
 
+    function getToken()
+    {
+        $client = new Client();
+        $params = [
+            "act" => "GetToken",
+            "username" => $this->username,
+            "password" => $this->password
+        ];
+
+        $req = $client->post( $this->url, [
+            'headers' => [
+                'Content-Type' => 'application/json',
+                'Accept' => 'application/json',
+            ],
+            'body' => json_encode($params)
+        ]);
+
+        $response = $req->getBody();
+        $result = json_decode($response,true);
+
+        return $result;
+
+    }
+
     public function runWS()
     {
         $client = new Client();

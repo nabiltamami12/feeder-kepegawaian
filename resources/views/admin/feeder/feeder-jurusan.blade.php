@@ -7,12 +7,54 @@ $data = new \App\Services\FeederDiktiApiService('GetProdi');
 $data->runWS();
 $response = $data->runWS();
 
+use App\Models\feeder\feeder_jurusan;
+
+$data_jurusan = feeder_jurusan::all();
 
 
+
+    // dd($response['data'][0] );
+  if (feeder_jurusan::all()->count() >= 1 ){
 foreach ($response['data'] as $key => $value) {
-    // dd($response['data'] );
 
-       // return view('admin.feeder.index',['data'=> $value]);
+      feeder_jurusan::where('id',1)->update([
+       'kode_jurusan' => $response['data'][$key]['kode_program_studi'],
+        'nama_jurusan' => $response['data'][$key]['nama_program_studi'],
+        // 'kode_fakultas', 
+        'program' => $response['data'][$key]['nama_jenjang_pendidikan'],
+        // 'kaprodi',
+        // 'akreditasi',
+        // 'sk_ban__pt',
+        // 'tgl_akhir_sk',
+        // 'nip_kaprodi',
+        'id_prodi' => $response['data'][$key]['id_prodi'],
+        'status_prodi' => $response['data'][$key]['status'],
+        // 'model_perwalian',
+ 
+        ]);
+    }
+  }
+  else{
+foreach ($response['data'] as $key => $value) {
+
+       feeder_jurusan::create([
+       'kode_jurusan' => $response['data'][$key]['kode_program_studi'],
+        'nama_jurusan' => $response['data'][$key]['nama_program_studi'],
+        // 'kode_fakultas', 
+        'program' => $response['data'][$key]['nama_jenjang_pendidikan'],
+        // 'kaprodi',
+        // 'akreditasi',
+        // 'sk_ban__pt',
+        // 'tgl_akhir_sk',
+        // 'nip_kaprodi',
+        'id_prodi' => $response['data'][$key]['id_prodi'],
+        'status_prodi' => $response['data'][$key]['status'],
+        // 'model_perwalian',
+ 
+        ]);
+          }
+      
+   
 }
 ?>
 
@@ -33,7 +75,7 @@ foreach ($response['data'] as $key => $value) {
            </div>
            <div class="col text-right">
 
-             <!--          <button type="button" onclick="add_btn()" class="btn btn-primary "><i class="iconify-inline mr-1" data-icon='bx:bx-plus-circle'></i>Tambah</button> -->
+             
 
            </div>
          </div>
@@ -56,14 +98,14 @@ foreach ($response['data'] as $key => $value) {
           <tbody>
 <tr>
 
-            @foreach($response['data'] as $key => $value)
+            @foreach($data_jurusan as $key => $value)
 
 
             <td  style="text-align:center">{{ $key + 1 }}</td>
-            <td  style="text-align:center">{{ $value['kode_program_studi'] }}</td>
-            <td  style="text-align:center">{{ $value['nama_program_studi'] }}</td>
-            <td  style="text-align:center">{{ $value['status'] }}</td>
-            <td  style="text-align:center">{{ $value['nama_jenjang_pendidikan'] }}</td>
+            <td  style="text-align:center">{{ $value['kode_jurusan'] }}</td>
+            <td  style="text-align:center">{{ $value['nama_jurusan'] }}</td>
+            <td  style="text-align:center">{{ $value['status_prodi'] }}</td>
+            <td  style="text-align:center">{{ $value['program'] }}</td>
             <td  style="text-align:center">{{ $value['id_prodi'] }}</td>
 
 

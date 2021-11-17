@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class config_feeder extends Model
 {
     use HasFactory;
+     protected $fillable = [
+        'id',
+        'username',
+        'password',
+        'url', 
+        'port',
+        'token',
+        'kode_pt',
+        'id_pt',
+        'created_at',
+        'updated_at',
+    ];
 }

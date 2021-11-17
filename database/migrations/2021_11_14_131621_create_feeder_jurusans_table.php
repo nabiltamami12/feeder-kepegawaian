@@ -24,8 +24,8 @@ class CreateFeederJurusansTable extends Migration
             $table->text('sk_ban_pt')->nullable();
             $table->string('tgl_akhir_sk')->nullable();
             $table->string('nip_kaprodi')->nullable();
-            $table->string('id_kaprodi')->nullable();
-            $table->string('status_kaprodi')->nullable();
+            $table->string('id_prodi')->nullable();
+            $table->string('status_prodi')->nullable();
 
             $table->tinyInteger('mode_perwalian')->nullable();
             $table->timestamps();
