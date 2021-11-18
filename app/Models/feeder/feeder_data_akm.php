@@ -8,4 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class feeder_data_akm extends Model
 {
     use HasFactory;
+      protected $fillable = [
+       		'semester',
+            'nim',
+            'nama',
+            'ips',
+            'ipk',
+            'sks_smt',
+            'sks_total',
+            'kode_jurusan',
+            'status_kuliah',
+            'status_error',
+            'valid',
+            'keterangan',
+        }
 }
