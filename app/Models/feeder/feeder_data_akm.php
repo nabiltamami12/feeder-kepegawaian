@@ -21,5 +21,5 @@ class feeder_data_akm extends Model
             'status_error',
             'valid',
             'keterangan',
-        }
+        ];
 }

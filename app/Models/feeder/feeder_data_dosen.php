@@ -22,5 +22,5 @@ class feeder_data_dosen extends Model
             'alamat',
             'foto_dosen',
             'id_dosen_feeder',
-        }
+        ];
 }

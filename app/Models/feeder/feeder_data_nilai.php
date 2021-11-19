@@ -24,5 +24,5 @@ class feeder_data_nilai extends Model
             'tugas',
             'uts',
             'uas',
-        }
+        ];
 }

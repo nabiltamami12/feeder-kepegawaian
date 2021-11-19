@@ -18,5 +18,5 @@ class feeder_data_kurikulum extends Model
         'jum_sks_pilihan',
         'status_kurikulum',
         'id_kurikulum',
-        }
+        ];
 }

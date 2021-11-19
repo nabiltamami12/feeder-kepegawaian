@@ -17,6 +17,7 @@ class feeder_data_mata_kuliah extends Model
           'bobot_praktek_lapangan',
           'bobot_simulasi',
           'id_mk',
+          'kode_mk',
           'prodi_mk',
-        }
+        ];
 }

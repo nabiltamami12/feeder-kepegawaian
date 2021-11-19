@@ -23,6 +23,7 @@ class CreateFeederDataMataKuliahsTable extends Migration
             $table->integer('bobot_praktek_lapangan')->nullable();
             $table->integer('bobot_simulasi')->nullable();
             $table->string('id_mk')->nullable();
+            $table->string('kode_mk')->nullable();
             $table->string('prodi_mk')->nullable();
             $table->timestamps();
         });

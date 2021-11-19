@@ -17,5 +17,5 @@ class feeder_data_mk_kurikulum extends Model
             'id_prodi_feeder',
             'status_upload_mk_kurikulum',
             'keterangan_upload_mk_kurikulum',
-        }
+        ];
 }

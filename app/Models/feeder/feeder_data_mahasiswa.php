@@ -68,5 +68,5 @@ class feeder_data_mahasiswa extends Model
             'foto_mahasiswa',
             'status_mahasiswa',
             'kode_paket',
-        }
+        ];
 }

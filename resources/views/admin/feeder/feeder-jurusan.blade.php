@@ -14,47 +14,50 @@ $data_jurusan = feeder_jurusan::all();
 
 
     // dd($response['data'][0] );
-  if (feeder_jurusan::all()->count() >= 1 ){
-foreach ($response['data'] as $key => $value) {
+if(isset($_POST["konek"]))
+{
+    if (feeder_jurusan::all()->count() >= 1 ){
+  foreach ($response['data'] as $key => $value) {
 
-      feeder_jurusan::where('id',1)->update([
-       'kode_jurusan' => $response['data'][$key]['kode_program_studi'],
-        'nama_jurusan' => $response['data'][$key]['nama_program_studi'],
-        // 'kode_fakultas', 
-        'program' => $response['data'][$key]['nama_jenjang_pendidikan'],
-        // 'kaprodi',
-        // 'akreditasi',
-        // 'sk_ban__pt',
-        // 'tgl_akhir_sk',
-        // 'nip_kaprodi',
-        'id_prodi' => $response['data'][$key]['id_prodi'],
-        'status_prodi' => $response['data'][$key]['status'],
-        // 'model_perwalian',
- 
-        ]);
-    }
-  }
-  else{
-foreach ($response['data'] as $key => $value) {
-
-       feeder_jurusan::create([
-       'kode_jurusan' => $response['data'][$key]['kode_program_studi'],
-        'nama_jurusan' => $response['data'][$key]['nama_program_studi'],
-        // 'kode_fakultas', 
-        'program' => $response['data'][$key]['nama_jenjang_pendidikan'],
-        // 'kaprodi',
-        // 'akreditasi',
-        // 'sk_ban__pt',
-        // 'tgl_akhir_sk',
-        // 'nip_kaprodi',
-        'id_prodi' => $response['data'][$key]['id_prodi'],
-        'status_prodi' => $response['data'][$key]['status'],
-        // 'model_perwalian',
- 
-        ]);
-          }
-      
+        feeder_jurusan::where('id',1)->update([
+         'kode_jurusan' => $response['data'][$key]['kode_program_studi'],
+          'nama_jurusan' => $response['data'][$key]['nama_program_studi'],
+          // 'kode_fakultas', 
+          'program' => $response['data'][$key]['nama_jenjang_pendidikan'],
+          // 'kaprodi',
+          // 'akreditasi',
+          // 'sk_ban__pt',
+          // 'tgl_akhir_sk',
+          // 'nip_kaprodi',
+          'id_prodi' => $response['data'][$key]['id_prodi'],
+          'status_prodi' => $response['data'][$key]['status'],
+          // 'model_perwalian',
    
+          ]);
+      }
+    }
+    else{
+  foreach ($response['data'] as $key => $value) {
+
+         feeder_jurusan::create([
+         'kode_jurusan' => $response['data'][$key]['kode_program_studi'],
+          'nama_jurusan' => $response['data'][$key]['nama_program_studi'],
+          // 'kode_fakultas', 
+          'program' => $response['data'][$key]['nama_jenjang_pendidikan'],
+          // 'kaprodi',
+          // 'akreditasi',
+          // 'sk_ban__pt',
+          // 'tgl_akhir_sk',
+          // 'nip_kaprodi',
+          'id_prodi' => $response['data'][$key]['id_prodi'],
+          'status_prodi' => $response['data'][$key]['status'],
+          // 'model_perwalian',
+   
+          ]);
+            }
+        
+     
+  }
 }
 ?>
 
@@ -67,20 +70,17 @@ foreach ($response['data'] as $key => $value) {
     <div class="col-xl-12">
       <div class="card padding--small">
     CATATAN : JIKA TERDAPAT JURUSAN YANG BELUM MEMILIKI ID JURUSAN DAN STATUS JURUSAN KLIK AMBIL DATA DARI FEEDER.
+         <hr class="mt">
+    
         <div class="card-header p-0 m-0 border-0">
           <div class=" row align-items-center">
-            <div class="col">
-         
-
-           </div>
            <div class="col text-right">
-
-             
-
+              <form role="form" action="" method="POST">
+                @csrf
+                  <button type="submit" name="konek" class="btn btn-sm btn-flat btn-default"><i class="fa fa-cloud-download"></i> DOWNLOAD FEEDER</button>
+              </form>
            </div>
          </div>
-
-         <hr class="mt">
        </div>
 
        <div class="box-body table-responsive">     

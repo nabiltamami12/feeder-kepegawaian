@@ -22,5 +22,5 @@ class feeder_data_dosen_ajar extends Model
             'status_error',
             'keterangan',
             'id_aktifitas_mengajar',
-        }
+        ];
 }

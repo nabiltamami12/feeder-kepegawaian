@@ -6,15 +6,62 @@
 $data = new \App\Services\FeederDiktiApiService('GetDetailMataKuliah');
 $data->runWS();
 $response = $data->runWS();
+use App\Models\feeder\feeder_data_mata_kuliah;
+
+$data_mata_kuliah = feeder_data_mata_kuliah::all();
+
+
+    // dd($response['data']);
+
+
+if(isset($_POST["konek"]))
+{
+        set_time_limit(600);
+
+    if (feeder_data_mata_kuliah::all()->count() >= 1 ){
+  foreach ($response['data'] as $key => $value) {
 
 
 
-foreach ($response['data'] as $key => $value) {
-  // dd($response['data'] );
+        feeder_data_mata_kuliah::where('id',1)->update([
 
-       // return view('admin.feeder.index',['data'=> $value]);
+          'nama_mk'=> $value['nama_mata_kuliah'],
+          'jenis_mata_kuliah'=> $value['id_jenis_mata_kuliah'],
+          'bobot_mk'=> $value['sks_mata_kuliah'],
+          'bobot_tatap_muka'=> $value['sks_tatap_muka'],
+          'bobot_pratikum'=> $value['sks_praktek'],
+          'bobot_praktek_lapangan'=> $value['sks_praktek_lapangan'],
+          'bobot_simulasi'=> $value['sks_simulasi'],
+          'id_mk'=> $value['id_matkul'],
+          'kode_mk'=> $value['kode_mata_kuliah'],
+          'prodi_mk'=> $value['nama_program_studi'],
+   
+          ]);
+      }
+    }
+    else{
+  foreach ($response['data'] as $key => $value) {
+
+         feeder_data_mata_kuliah::create([
+                'nama_mk'=> $value['nama_mata_kuliah'],
+          'jenis_mata_kuliah'=> $value['id_jenis_mata_kuliah'],
+          'bobot_mk'=> $value['sks_mata_kuliah'],
+          'bobot_tatap_muka'=> $value['sks_tatap_muka'],
+          'bobot_pratikum'=> $value['sks_praktek'],
+          'bobot_praktek_lapangan'=> $value['sks_praktek_lapangan'],
+          'bobot_simulasi'=> $value['sks_simulasi'],
+          'id_mk'=> $value['id_matkul'],
+          'kode_mk'=> $value['kode_mata_kuliah'],
+          'prodi_mk'=> $value['nama_program_studi'],
+   
+          ]);
+            }
+        
+     
+  }
 }
 ?>
+
 
 <!-- Header -->
 <header class="header"></header>
@@ -32,9 +79,10 @@ foreach ($response['data'] as $key => $value) {
 
           </div>
           <div class="col text-right">
-
-           <!--          <button type="button" onclick="add_btn()" class="btn btn-primary "><i class="iconify-inline mr-1" data-icon='bx:bx-plus-circle'></i>Tambah</button> -->
-
+  <form role="form" action="" method="POST">
+                @csrf
+                  <button type="submit" name="konek" class="btn btn-sm btn-flat btn-default"><i class="fa fa-cloud-download"></i> DOWNLOAD FEEDER</button>
+              </form>
          </div>
        </div>
 
@@ -57,13 +105,13 @@ foreach ($response['data'] as $key => $value) {
         <tbody>
           <tr>
 
-            @foreach($response['data'] as $key => $value)
+            @foreach($data_mata_kuliah as $key => $value)
 
 
             <td >{{ $key + 1 }}</td>
-            <td  style="text-align:center">{{ $value['kode_mata_kuliah'] }}</td>
-            <td  style="text-align:center">{{ $value['nama_mata_kuliah'] }}</td>
-            <td  style="text-align:center">{{ $value['sks_mata_kuliah'] }}</td>
+            <td  style="text-align:center">{{ $value['kode_mk'] }}</td>
+            <td  style="text-align:center">{{ $value['nama_mk'] }}</td>
+            <td  style="text-align:center">{{ $value['bobot_mk'] }}</td>
 
 
             @if($value['id_jenis_mata_kuliah'] == "A")
@@ -87,7 +135,7 @@ foreach ($response['data'] as $key => $value) {
 
             @endif
 
-            <td  style="text-align:center">{{ $value['nama_program_studi'] }}</td>
+            <td  style="text-align:center">{{ $value['prodi_mk'] }}</td>
         
             @if($value['id_matkul'] != null)
 

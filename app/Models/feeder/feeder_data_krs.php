@@ -26,5 +26,5 @@ class feeder_data_krs extends Model
             'hari',
             'jam',
             'nama_ruang',
-        }
+        ];
 }

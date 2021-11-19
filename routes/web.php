@@ -466,67 +466,67 @@ Route::prefix('admin')->middleware(['aksesuntuk:admin'])->group(function () {
                 "title" => "admin-feeder"
             ]);
         });
-      Route::get('/feeder-jurusan', function () {
+      Route::any('/feeder-jurusan', function () {
             return view('admin.feeder.feeder-jurusan', [
                 "title" => "admin-feeder"
             ]);
         });
-      Route::get('/download-feeder/{username}', function () {
+      Route::any('/download-feeder/{username}', function () {
             return view('admin.feeder.feeder-jurusan', [
                 "title" => "admin-feeder"
             ]);
         });
-      Route::get('/feeder-skala_nilai', function () {
+      Route::any('/feeder-skala_nilai', function () {
             return view('admin.feeder.feeder-skala_nilai', [
                 "title" => "admin-feeder"
             ]);
         });
-      Route::get('/feeder-data_mata_kuliah', function () {
+      Route::any('/feeder-data_mata_kuliah', function () {
             return view('admin.feeder.feeder-data_mata_kuliah', [
                 "title" => "admin-feeder"
             ]);
         });
-      Route::get('/feeder-data_kurikulum', function () {
+      Route::any('/feeder-data_kurikulum', function () {
             return view('admin.feeder.feeder-data_kurikulum', [
                 "title" => "admin-feeder"
             ]);
         });
-      Route::get('/feeder-data_mk_kurikulum', function () {
+      Route::any('/feeder-data_mk_kurikulum', function () {
             return view('admin.feeder.feeder-data_mk_kurikulum', [
                 "title" => "admin-feeder"
             ]);
         });
-      Route::get('/feeder-data_mahasiswa', function () {
+      Route::any('/feeder-data_mahasiswa', function () {
             return view('admin.feeder.feeder-data_mahasiswa', [
                 "title" => "admin-feeder"
             ]);
         });
-      Route::get('/feeder-data_dosen', function () {
+      Route::any('/feeder-data_dosen', function () {
             return view('admin.feeder.feeder-data_dosen', [
                 "title" => "admin-feeder"
             ]);
         });
-      Route::get('/feeder-data_kelas', function () {
+      Route::any('/feeder-data_kelas', function () {
             return view('admin.feeder.feeder-data_kelas', [
                 "title" => "admin-feeder"
             ]);
         });
-      Route::get('/feeder-data_dosen_ajar', function () {
+      Route::any('/feeder-data_dosen_ajar', function () {
             return view('admin.feeder.feeder-data_dosen_ajar', [
                 "title" => "admin-feeder"
             ]);
         });
-      Route::get('/feeder-data_krs', function () {
+      Route::any('/feeder-data_krs', function () {
             return view('admin.feeder.feeder-data_krs', [
                 "title" => "admin-feeder"
             ]);
         });
-      Route::get('/feeder-data_nilai', function () {
+      Route::any('/feeder-data_nilai', function () {
             return view('admin.feeder.feeder-data_nilai', [
                 "title" => "admin-feeder"
             ]);
         });
-      Route::get('/feeder-data_akm', function () {
+      Route::any('/feeder-data_akm', function () {
             return view('admin.feeder.feeder-data_akm', [
                 "title" => "admin-feeder"
             ]);

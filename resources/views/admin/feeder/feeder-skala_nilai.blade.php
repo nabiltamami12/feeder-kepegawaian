@@ -9,10 +9,50 @@ $response = $data->runWS();
 
 
 
-foreach ($response['data'] as $key => $value) {
-  // dd($response['data'] );
+use App\Models\feeder\feeder_skala_nilai;
 
-       // return view('admin.feeder.index',['data'=> $value]);
+$data_skala_nilai = feeder_skala_nilai::with('jurusan')->get();
+
+
+    // dd($data_skala_nilai->jurusan->nama_jurusan);
+
+
+if(isset($_POST["konek"]))
+{
+    if (feeder_skala_nilai::all()->count() >= 1 ){
+  foreach ($response['data'] as $key => $value) {
+
+        feeder_skala_nilai::where('id',1)->update([
+          'nilai_huruf' => $value['nilai_huruf'],
+            'nilai_indeks' => $value['nilai_indeks'],
+            'bobot_nilai_min' => $value['bobot_minimum'],
+            'bobot_nilai_maks' => $value['bobot_maksimum'],
+           'tgl_mulai_efektif' => $value['tanggal_mulai_efektif'],
+           'tgl_akhir_efektif' => $value['tanggal_akhir_efektif'],
+            'kode_jurusan' => $value['id_prodi'],
+            'id_bobot_nilai' => $value['id_bobot_nilai'],
+   
+          ]);
+      }
+    }
+    else{
+  foreach ($response['data'] as $key => $value) {
+
+         feeder_skala_nilai::create([
+          'nilai_huruf' => $value['nilai_huruf'],
+            'nilai_indeks' => $value['nilai_indeks'],
+            'bobot_nilai_min' => $value['bobot_minimum'],
+            'bobot_nilai_maks' => $value['bobot_maksimum'],
+           'tgl_mulai_efektif' => $value['tanggal_mulai_efektif'],
+           'tgl_akhir_efektif' => $value['tanggal_akhir_efektif'],
+            'kode_jurusan' => $value['id_prodi'],
+            'id_bobot_nilai' => $value['id_bobot_nilai'],
+   
+          ]);
+            }
+        
+     
+  }
 }
 ?>
 
@@ -25,20 +65,17 @@ foreach ($response['data'] as $key => $value) {
     <div class="col-xl-12">
       <div class="card padding--small">
      DOWNLOAD DAN UPLOAD DATA SKALA NILAI KE FEEDER
+           <hr class="mt">
+    
         <div class="card-header p-0 m-0 border-0">
           <div class=" row align-items-center">
-            <div class="col">
-
-
-            </div>
-            <div class="col text-right">
-
-             <!--          <button type="button" onclick="add_btn()" class="btn btn-primary "><i class="iconify-inline mr-1" data-icon='bx:bx-plus-circle'></i>Tambah</button> -->
-
+           <div class="col text-right">
+              <form role="form" action="" method="POST">
+                @csrf
+                  <button type="submit" name="konek" class="btn btn-sm btn-flat btn-default"><i class="fa fa-cloud-download"></i> DOWNLOAD FEEDER</button>
+              </form>
            </div>
          </div>
-
-         <hr class="mt">
        </div>
 
        <div class="box-body table-responsive">     
@@ -59,22 +96,20 @@ foreach ($response['data'] as $key => $value) {
           <tbody>
             <tr>
 
-              @foreach($response['data'] as $key => $value)
-
-
+            @foreach($data_skala_nilai as $key => $value)
               <td >{{ $key + 1 }}</td>
-              <td >{{ substr($value['nama_program_studi'],3) }}</td>
-              <td  style="text-align:center">{{ $value['nilai_huruf'] }}</td>
-              <td  style="text-align:center">{{ $value['nilai_indeks'] }}</td>
-              <td  style="text-align:center">{{ $value['bobot_minimum'] }}</td>
-              <td  style="text-align:center">{{ $value['bobot_maksimum'] }}</td>
-              <td  style="text-align:center">{{ $value['tanggal_mulai_efektif'] }}</td>
-              <td  style="text-align:center">{{ $value['tanggal_akhir_efektif'] }}</td>
+              <td >{{ $value->jurusan }}</td> 
+              <td  style="text-align:center">{{ $value->nilai_huruf }}</td>
+              <td  style="text-align:center">{{ $value->nilai_indeks }}</td>
+              <td  style="text-align:center">{{ $value->bobot_nilai_min }}</td>
+              <td  style="text-align:center">{{ $value->bobot_nilai_maks }}</td>
+              <td  style="text-align:center">{{ $value->tgl_mulai_efektif }}</td>
+              <td  style="text-align:center">{{ $value->tgl_akhir_efektif }}</td>
               @php
               $exp = date('today');
           @endphp
 
-              @if($value['tanggal_mulai_efektif'] == $exp)
+              @if($value->tgl_mulai_efektif == $exp)
               <td  style="text-align:center">Sudah Ada</td>
             @else
             <td  style="text-align:center">Sudah Ada</td>
