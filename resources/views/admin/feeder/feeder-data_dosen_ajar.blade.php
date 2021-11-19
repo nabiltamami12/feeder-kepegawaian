@@ -19,7 +19,21 @@ $response = $data->runWS();
 
   // dd($token);
   dd($response['data'] );
-
+  "id_aktivitas_mengajar" => "001c8f4d-d468-4af4-a793-7e113a5f1c5f"
+    "id_registrasi_dosen" => "806408d2-a2c1-42af-a0d3-316b1308b30a"
+    "id_dosen" => "d558ecde-84ae-4a0f-8a86-4f52b5f66274"
+    "nidn" => "0710126901"
+    "nama_dosen" => "RIO SUDIRMAN"
+    "id_kelas_kuliah" => "61ab1c1f-755f-4919-acae-813fb24c84b8"
+    "nama_kelas_kuliah" => "02"
+    "id_substansi" => null
+    "sks_substansi_total" => "3.00"
+    "rencana_minggu_pertemuan" => "14"
+    "realisasi_minggu_pertemuan" => "14"
+    "id_jenis_evaluasi" => "1"
+    "nama_jenis_evaluasi" => "Evaluasi Akademik"
+    "id_prodi" => "e48035e4-b3b4-489b-a01e-5f7ca23d5869"
+    "id_semester" => "20141"
 
 $data_data_dosen = feeder_data_dosen::all();
 
@@ -27,6 +41,64 @@ $data_data_dosen = feeder_data_dosen::all();
 
 
 
+      
+if(isset($_POST["konek"]))
+{
+        set_time_limit(600);
+
+    if (feeder_data_dosen::all()->count() >= 1 ){
+  foreach ($response['data'] as $key => $value) {
+
+  
+
+        feeder_data_dosen::where('id',1)->update([
+
+            'semester' => $value['id_semester'],
+            'nidn' => $value['nidn'],
+            'nama_dosen' => $value['nama_dosen'],
+            'kode_mk' => $value[''],
+            'nama_mk' => $value[''],
+            'nama_kelas' => $value[''],
+            'rencana_tatap_muka' => $value[''],
+            'tatap_muka_real' => $value[''],
+            'kode_jurusan' => $value[''],
+            'sks_ajar' => $value[''],
+            'status_error' => $value[''],
+            'keterangan' => $value[''],
+            'id_aktifitas_mengajar' => $value[''],,
+
+        
+
+
+   
+          ]);
+      }
+    }
+    else{
+  foreach ($response['data'] as $key => $value) {
+
+         feeder_data_dosen::create([
+         
+            'nip' => $value['nidn'],
+            'nidn' => $value['nidn'],
+            'nama_dosen' => $value['nama_dosen'],
+            'kelamin' => $value['jenis_kelamin'],
+            'agama' => $value['nama_agama'],
+            'tmpt_lahir' => '',
+            'tgl_lahir' => $value['tanggal_lahir'],
+            'id_status_dosen' => $value['id_status_aktif'],
+            'email' => '',
+            'telp' => '',
+            'alamat' => '',
+            'foto_dosen' => 'default.jpg',
+            'id_dosen_feeder' => $value['id_dosen'],
+   
+          ]);
+            }
+        
+     
+  }
+}
 ?>
 
 
