@@ -47,6 +47,8 @@ class FeederDiktiApiService {
 
     public function runWS()
     {
+        set_time_limit(2000);
+        
         $client = new Client();
         $params = [
             "act" => "GetToken",

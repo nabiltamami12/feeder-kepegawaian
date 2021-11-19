@@ -3,18 +3,32 @@
 @section('content')
 
 <?php
+use App\Models\feeder\config_feeder;
+$token_id = config_feeder::first();
+
+// $data = new \App\Services\FeederDiktiApiService("GetProfilPT");
+
 $data = new \App\Services\FeederDiktiApiService('GetDosenPengajarKelasKuliah');
+$token = $data->getToken();
+   config_feeder::where('id',$token_id->id)->update([
+            'token' => $token['data']['token'],
+ 
+        ]);
 $data->runWS();
 $response = $data->runWS();
 
-
-
-foreach ($response['data'] as $key => $value) {
+  // dd($token);
   dd($response['data'] );
 
-       // return view('admin.feeder.index',['data'=> $value]);
-}
+
+$data_data_dosen = feeder_data_dosen::all();
+
+
+
+
+
 ?>
+
 
 <!-- Header -->
 <header class="header"></header>

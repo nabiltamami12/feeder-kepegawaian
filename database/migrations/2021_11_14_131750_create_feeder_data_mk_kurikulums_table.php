@@ -17,7 +17,7 @@ class CreateFeederDataMkKurikulumsTable extends Migration
             $table->id();
             $table->integer('kode_mk_kurikulum')->nullable();
             $table->string('kode_mk')->nullable();
-            $table->integer('kode_kurikulum')->nullable();
+            $table->string('kode_kurikulum')->nullable();
             $table->integer('semester')->nullable();
             $table->integer('status_mk')->nullable();
             $table->string('id_prodi_feeder')->nullable();

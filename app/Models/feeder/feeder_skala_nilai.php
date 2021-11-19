@@ -4,7 +4,7 @@ namespace App\Models\feeder;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\feeder\feeder_jurusan;
+// use App\Models\feeder\feeder_jurusan;
 
 class feeder_skala_nilai extends Model
 {

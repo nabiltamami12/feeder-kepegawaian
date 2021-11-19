@@ -7,13 +7,13 @@ $data = new \App\Services\FeederDiktiApiService('GetDetailKelasKuliah');
 $data->runWS();
 $response = $data->runWS();
 
+        set_time_limit(1200);
 
 
-foreach ($response['data'] as $key => $value) {
-  dd($response['data'] );
+  dd($response['data']);
 
-       // return view('admin.feeder.index',['data'=> $value]);
-}
+
+
 ?>
 
 <!-- Header -->

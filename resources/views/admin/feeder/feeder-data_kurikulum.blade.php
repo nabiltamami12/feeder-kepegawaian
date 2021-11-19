@@ -25,7 +25,7 @@ if(isset($_POST["konek"]))
 
         feeder_data_kurikulum::where('id',1)->update([
 
-        'kode_kurikulum' => $key -1,
+        'kode_kurikulum' => $key + 1,
         'nama_kurikulum' => $value['nama_kurikulum'],
         'kode_jurusan' => $value['nama_program_studi'],
         'kode_thn_ajaran' => $value['id_semester'],
@@ -44,7 +44,7 @@ if(isset($_POST["konek"]))
   foreach ($response['data'] as $key => $value) {
 
          feeder_data_kurikulum::create([
-                  'kode_kurikulum' => $key -1 ,
+        'kode_kurikulum' => $key + 1 ,
         'nama_kurikulum' => $value['nama_kurikulum'],
         'kode_jurusan' => $value['nama_program_studi'],
         'kode_thn_ajaran' => $value['id_semester'],
@@ -109,8 +109,9 @@ if(isset($_POST["konek"]))
 
             <td >{{ $key + 1 }}</td>
             <td  style="text-align:center">{{ $value['nama_kurikulum'] }}</td>
+
             <td  style="text-align:center">{{ $value['kode_jurusan'] }}</td>
-            <td  style="text-align:center">{{ $value['kode_thn_ajaran '] }}</td>
+            <td  style="text-align:center">{{ $value['kode_thn_ajaran'] }}</td>
             <td  style="text-align:center">{{ $value['jum_sks'] }}</td>
 
 

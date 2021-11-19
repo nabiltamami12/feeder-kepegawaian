@@ -18,4 +18,11 @@ class feeder_data_mk_kurikulum extends Model
             'status_upload_mk_kurikulum',
             'keterangan_upload_mk_kurikulum',
         ];
+
+    public function kurikulum() {
+        return $this->belongsTo(feeder_data_kurikulum::class, 'kode_kurikulum', 'id_kurikulum');
+    }
+    public function prodi() {
+        return $this->belongsTo(feeder_data_mata_kuliah::class, 'id_prodi_feeder', 'id_mk');
+    }
 }

@@ -7,12 +7,108 @@ $data = new \App\Services\FeederDiktiApiService('GetDetailMataKuliah');
 $data->runWS();
 $response = $data->runWS();
 
+  dd($response['data'] );
 
 
 foreach ($response['data'] as $key => $value) {
-  // dd($response['data'] );
 
-       // return view('admin.feeder.index',['data'=> $value]);
+if(isset($_POST["konek"]))
+{
+        set_time_limit(600);
+
+    if (feeder_data_mk_kurikulum::all()->count() >= 1 ){
+  foreach ($response['data'] as $key => $value) {
+
+
+
+        feeder_data_mk_kurikulum::where('id',1)->update([
+
+            'nama_pd' => $value[''],
+            'jk' => $value[''],
+            'nisn' => $value[''],
+            'npwp' => $value[''],
+            'nik' => $value[''],
+            'tmpt_lahir' => $value[''],
+            'tgl_lahir' => $value[''],
+            'id_agama' => $value[''],
+            'id_kk' => $value[''],
+            'jln' => $value[''],
+            'rt' => $value[''],
+            'rw' => $value[''],
+            'nama_dusun' => $value[''],
+            'desa_kel' => $value[''],
+            'id_wilayah' => $value[''],
+            'id_jenis_tinggal' => $value[''],
+            'id_alat_transportasi' => $value[''],
+            'no_telp_rumah' => $value[''],
+            'no_hp' => $value[''],
+            'email' => $value[''],
+            'a_terima_kps' => $value[''],
+            'no_kps' => $value[''],
+            'stat_pd' => $value[''],
+            'nik_ayah' => $value[''],
+            'nama_ayah' => $value[''],
+            'tgl_lahir_ayah' => $value[''],
+            'id_jenjang_pendidikan_ayah' => $value[''],
+            'id_kebutuhan_khusus_ayah' => $value[''],
+            'id_kebutuhan_khusus_ibu' => $value[''],
+            'id_pekerjaan_ayah' => $value[''],
+            'id_penghasilan_ayah' => $value[''],
+            'nik_ibu' => $value[''],
+            'nama_ibu' => $value[''],
+            'tgl_lahir_ibu' => $value[''],
+            'id_jenjang_pendidikan_ibu' => $value[''],
+            'id_pekerjaan_ibu' => $value[''],
+            'id_penghasilan_ibu' => $value[''],
+            'nik_wali' => $value[''],
+            'nama_wali' => $value[''],
+            'tgl_lahir_wali' => $value[''],
+            'id_jenjang_pendidikan_wali' => $value[''],
+            'id_pekerjaan_wali' => $value[''],
+            'id_penghasilan_wali' => $value[''],
+            'kewarganegaraan' => $value[''],
+            'kode_jurusan' => $value[''],
+            'id_jenis_daftar' => $value[''],
+            'nim' => $value[''],
+            'tgl_masuk_sp' => $value[''],
+            'mulai_smt' => $value[''],
+            'id_pembayaran' => $value[''],
+            'id_jalur_masuk' => $value[''],
+            'status_error' => $value[''],
+            'keteangan' => $value[''],
+            'password' => $value[''],
+            'biaya_masuk_kuliah' => $value[''],
+            'id_reg_mahasiswa' => $value[''],
+            'foto_mahasiswa' => $value[''],
+            'status_mahasiswa' => $value[''],
+            'kode_paket' => $value[''],
+
+        
+
+
+   
+          ]);
+      }
+    }
+    else{
+  foreach ($response['data'] as $key => $value) {
+
+         feeder_data_mk_kurikulum::create([
+         
+            'kode_mk_kurikulum' => $key + 1,
+            'kode_mk' => $value['kode_mata_kuliah'],
+            'kode_kurikulum' => $value['id_kurikulum'],
+            'semester' => $value['semester'],
+            'status_mk' => $value['apakah_wajib'],
+            'id_prodi_feeder' => $value['id_prodi'],
+            'status_upload_mk_kurikulum' => 1,
+            'keterangan_upload_mk_kurikulum' => 'SUKSES UPLOAD',
+   
+          ]);
+            }
+        
+     
+  }
 }
 ?>
 
@@ -46,11 +142,11 @@ foreach ($response['data'] as $key => $value) {
         <thead >
           <tr>
             <th style="text-align:center">No</th>
-            <th style="text-align:center">Kode</th>
-            <th style="text-align:center">Nama Mata Kuliah</th>
-            <th style="text-align:center">Bobot MK</th>                        
-            <th style="text-align:center">Jenis MK</th>                        
-            <th style="text-align:center">Prodi MK</th>                        
+            <th style="text-align:center">NIM</th>
+            <th style="text-align:center">Nama Mahasiswa</th>
+            <th style="text-align:center">Prodi</th>                        
+            <th style="text-align:center">Status</th>                        
+            <th style="text-align:center">Keterangan</th>                        
             <th style="text-align:center">Status</th>
           </tr>
         </thead>

@@ -98,7 +98,11 @@ if(isset($_POST["konek"]))
 
             @foreach($data_skala_nilai as $key => $value)
               <td >{{ $key + 1 }}</td>
-              <td >{{ $value->jurusan }}</td> 
+              @if($value->jurusan != null)
+              <td >{{ $value->jurusan->nama_jurusan }}</td>
+              @else
+              <td></td>
+              @endif 
               <td  style="text-align:center">{{ $value->nilai_huruf }}</td>
               <td  style="text-align:center">{{ $value->nilai_indeks }}</td>
               <td  style="text-align:center">{{ $value->bobot_nilai_min }}</td>
@@ -109,10 +113,10 @@ if(isset($_POST["konek"]))
               $exp = date('today');
           @endphp
 
-              @if($value->tgl_mulai_efektif == $exp)
+              @if($value->tgl_mulai_efektif <= $exp)
               <td  style="text-align:center">Sudah Ada</td>
             @else
-            <td  style="text-align:center">Sudah Ada</td>
+            <td  style="text-align:center">Belum Ada</td>
           @endif
 
 

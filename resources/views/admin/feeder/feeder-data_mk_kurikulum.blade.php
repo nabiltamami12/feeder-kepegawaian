@@ -11,7 +11,7 @@ use App\Models\feeder\feeder_data_mk_kurikulum;
 $data_mk_kurikulum = feeder_data_mk_kurikulum::all();
 
 
-    dd($response['data']);
+    // dd($response['data']);
 
 
 if(isset($_POST["konek"]))
@@ -21,27 +21,18 @@ if(isset($_POST["konek"]))
     if (feeder_data_mk_kurikulum::all()->count() >= 1 ){
   foreach ($response['data'] as $key => $value) {
 
-      // "id_kurikulum" => "7082d3d2-8a3b-4d48-9c97-1aee9bc0f5fe"
-      // "nama_kurikulum" => "FISIP GANJIL 2019"
-      // "id_prodi" => "a9d7728d-1f3a-4977-9478-aba84333eb44"
-      // "nama_program_studi" => "S1 Ilmu Administrasi Negara"
-      // "id_semester" => "20191"
-      // "semester_mulai_berlaku" => "2019/2020 Ganjil"
-      // "jumlah_sks_lulus" => "88"
-      // "jumlah_sks_wajib" => "88"
-      // "jumlah_sks_pilihan" => "0"
 
 
         feeder_data_mk_kurikulum::where('id',1)->update([
 
-   'kode_mk_kurikulum' => $key -1,
-            'kode_mk' => $value[''],
-            'kode_kurikulum' => $value[''],
-            'semester' => $value[''],
-            'status_mk' => $value[''],
-            'id_prodi_feeder' => $value[''],
-            'status_upload_mk_kurikulum' => $value[''],
-            'keterangan_upload_mk_kurikulum' => $value[''],
+            'kode_mk_kurikulum' => $key + 1,
+            'kode_mk' => $value['kode_mata_kuliah'],
+            'kode_kurikulum' => $value['id_kurikulum'],
+            'semester' => $value['semester'],
+            'status_mk' => $value['apakah_wajib'],
+            'id_prodi_feeder' => $value['id_prodi'],
+            'status_upload_mk_kurikulum' => 1,
+            'keterangan_upload_mk_kurikulum' => 'SUKSES UPLOAD',
 
         
 
@@ -55,7 +46,14 @@ if(isset($_POST["konek"]))
 
          feeder_data_mk_kurikulum::create([
          
-
+            'kode_mk_kurikulum' => $key + 1,
+            'kode_mk' => $value['kode_mata_kuliah'],
+            'kode_kurikulum' => $value['id_kurikulum'],
+            'semester' => $value['semester'],
+            'status_mk' => $value['apakah_wajib'],
+            'id_prodi_feeder' => $value['id_prodi'],
+            'status_upload_mk_kurikulum' => 1,
+            'keterangan_upload_mk_kurikulum' => 'SUKSES UPLOAD',
    
           ]);
             }
@@ -82,7 +80,7 @@ if(isset($_POST["konek"]))
 
           </div>
           <div class="col text-right">
-  <form role="form" action="" method="POST">
+              <form role="form" action="" method="POST">
                 @csrf
                   <button type="submit" name="konek" class="btn btn-sm btn-flat btn-default"><i class="fa fa-cloud-download"></i> DOWNLOAD FEEDER</button>
               </form>
@@ -111,28 +109,25 @@ if(isset($_POST["konek"]))
           <tr>
 
             @foreach($data_mk_kurikulum as $key => $value)
-
-
             <td >{{ $key + 1 }}</td>
-            <td  style="text-align:center">{{ $value['nama_kurikulum'] }}</td>
-            <td  style="text-align:center">{{ $value['kode_jurusan'] }}</td>
-            <td  style="text-align:center">{{ $value['kode_thn_ajaran '] }}</td>
-            <td  style="text-align:center">{{ $value['jum_sks'] }}</td>
-
-
-            @if($value['status'] == 1)
-            <td  style="text-align:center">SUDAH ADA</td>
-
-            @else
-
-            <td  style="text-align:center">BELUM ADA</td>
-
+            <td  style="text-align:center">{{ $value['kode_mk'] }}</td>
+            <td  style="text-align:center">{{ $value->prodi }}</td>
+     
+            @if($value->kurikulum != null)
+            <td  style="text-align:center">{{ $value->kurikulum->bobot_mk }}</td>
+            <td  style="text-align:center">{{ $value->kurikulum->jenis_mata_kuliah }}</td>
+            <td  style="text-align:center">{{ $value->kurikulum->nama_kurikulum }}</td>
+             @else
+            <td></td>
             @endif
-
-
-
+            @if($value->prodi != null)
+            <td  style="text-align:center">{{ $value->prodi->program }} {{ $value->prodi->nama_jurusan }}</td>
+            @else
+            <td></td>
+            @endif
+            <td  style="text-align:center">{{ $value['semester'] }}</td>
+            <td  style="text-align:center">{{ $value['keterangan_upload_mk_kurikulum'] }}</td>
           </tr>
-
           @endforeach
 
         </tbody>

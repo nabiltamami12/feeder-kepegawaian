@@ -6,13 +6,70 @@
 $data = new \App\Services\FeederDiktiApiService('GetListDosen');
 $data->runWS();
 $response = $data->runWS();
+use App\Models\feeder\feeder_data_dosen;
 
-
-
-foreach ($response['data'] as $key => $value) {
+$data_data_dosen = feeder_data_dosen::all();
   // dd($response['data'] );
 
-       // return view('admin.feeder.index',['data'=> $value]);
+
+
+      
+if(isset($_POST["konek"]))
+{
+        set_time_limit(600);
+
+    if (feeder_data_dosen::all()->count() >= 1 ){
+  foreach ($response['data'] as $key => $value) {
+
+  
+
+        feeder_data_dosen::where('id',1)->update([
+
+            'nip' => $value['nidn'],
+            'nidn' => $value['nidn'],
+            'nama_dosen' => $value['nama_dosen'],
+            'kelamin' => $value['jenis_kelamin'],
+            'agama' => $value['nama_agama'],
+            'tmpt_lahir' => '',
+            'tgl_lahir' => $value['tanggal_lahir'],
+            'id_status_dosen' => $value['id_status_aktif'],
+            'email' => '',
+            'telp' => '',
+            'alamat' => '',
+            'foto_dosen' => 'default.jpg',
+            'id_dosen_feeder' => $value['id_dosen'],
+
+        
+
+
+   
+          ]);
+      }
+    }
+    else{
+  foreach ($response['data'] as $key => $value) {
+
+         feeder_data_dosen::create([
+         
+            'nip' => $value['nidn'],
+            'nidn' => $value['nidn'],
+            'nama_dosen' => $value['nama_dosen'],
+            'kelamin' => $value['jenis_kelamin'],
+            'agama' => $value['nama_agama'],
+            'tmpt_lahir' => '',
+            'tgl_lahir' => $value['tanggal_lahir'],
+            'id_status_dosen' => $value['id_status_aktif'],
+            'email' => '',
+            'telp' => '',
+            'alamat' => '',
+            'foto_dosen' => 'default.jpg',
+            'id_dosen_feeder' => $value['id_dosen'],
+   
+          ]);
+            }
+        
+     
+  }
 }
 ?>
 
@@ -32,9 +89,10 @@ foreach ($response['data'] as $key => $value) {
 
           </div>
           <div class="col text-right">
-
-           <!--          <button type="button" onclick="add_btn()" class="btn btn-primary "><i class="iconify-inline mr-1" data-icon='bx:bx-plus-circle'></i>Tambah</button> -->
-
+              <form role="form" action="" method="POST">
+                @csrf
+                  <button type="submit" name="konek" class="btn btn-sm btn-flat btn-default"><i class="fa fa-cloud-download"></i> DOWNLOAD FEEDER</button>
+              </form>
          </div>
        </div>
 
@@ -57,7 +115,7 @@ foreach ($response['data'] as $key => $value) {
         <tbody>
           <tr>
 
-            @foreach($response['data'] as $key => $value)
+            @foreach($data_data_dosen as $key => $value)
 
 
             <td >{{ $key + 1 }}</td>
@@ -65,10 +123,18 @@ foreach ($response['data'] as $key => $value) {
             <td  style="text-align:center">{{ $value['nidn'] }}</td>
             <td  style="text-align:center">{{ $value['nama_dosen'] }}</td>
             <td  style="text-align:center"> - </td>
-            <td  style="text-align:center">{{ $value['nama_status_aktif'] }}</td>
 
-        
-            @if($value['id_dosen'] != null)
+          @if($value['id_status_dosen'] == 1)
+
+            <td  style="text-align:center">AKTIF</td>
+       
+            @else
+
+            <td  style="text-align:center"></td>
+
+            @endif
+
+            @if($value['id_dosen_feeder'] != null)
 
             <td  style="text-align:center">SUDAH ADA</td>
 
