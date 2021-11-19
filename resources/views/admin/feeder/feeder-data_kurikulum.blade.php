@@ -110,7 +110,7 @@ if(isset($_POST["konek"]))
             <td >{{ $key + 1 }}</td>
             <td  style="text-align:center">{{ $value['nama_kurikulum'] }}</td>
             <td  style="text-align:center">{{ $value['kode_jurusan'] }}</td>
-            <td  style="text-align:center">{{ $value['kode_thn_ajar'] }}</td>
+            <td  style="text-align:center">{{ $value['kode_thn_ajaran '] }}</td>
             <td  style="text-align:center">{{ $value['jum_sks'] }}</td>
 
 

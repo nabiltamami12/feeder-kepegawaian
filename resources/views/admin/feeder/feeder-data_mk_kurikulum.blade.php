@@ -3,38 +3,49 @@
 @section('content')
 
 <?php
-$data = new \App\Services\FeederDiktiApiService('GetDetailMataKuliah');
+$data = new \App\Services\FeederDiktiApiService('GetMatkulKurikulum');
 $data->runWS();
 $response = $data->runWS();
-use App\Models\feeder\feeder_data_mata_kuliah;
+use App\Models\feeder\feeder_data_mk_kurikulum;
 
-$data_mata_kuliah = feeder_data_mata_kuliah::all();
+$data_mk_kurikulum = feeder_data_mk_kurikulum::all();
 
 
-    // dd($response['data']);
+    dd($response['data']);
 
 
 if(isset($_POST["konek"]))
 {
         set_time_limit(600);
 
-    if (feeder_data_mata_kuliah::all()->count() >= 1 ){
+    if (feeder_data_mk_kurikulum::all()->count() >= 1 ){
   foreach ($response['data'] as $key => $value) {
 
+      // "id_kurikulum" => "7082d3d2-8a3b-4d48-9c97-1aee9bc0f5fe"
+      // "nama_kurikulum" => "FISIP GANJIL 2019"
+      // "id_prodi" => "a9d7728d-1f3a-4977-9478-aba84333eb44"
+      // "nama_program_studi" => "S1 Ilmu Administrasi Negara"
+      // "id_semester" => "20191"
+      // "semester_mulai_berlaku" => "2019/2020 Ganjil"
+      // "jumlah_sks_lulus" => "88"
+      // "jumlah_sks_wajib" => "88"
+      // "jumlah_sks_pilihan" => "0"
 
 
-        feeder_data_mata_kuliah::where('id',1)->update([
+        feeder_data_mk_kurikulum::where('id',1)->update([
 
-          'nama_mk'=> $value['nama_mata_kuliah'],
-          'jenis_mata_kuliah'=> $value['id_jenis_mata_kuliah'],
-          'bobot_mk'=> $value['sks_mata_kuliah'],
-          'bobot_tatap_muka'=> $value['sks_tatap_muka'],
-          'bobot_pratikum'=> $value['sks_praktek'],
-          'bobot_praktek_lapangan'=> $value['sks_praktek_lapangan'],
-          'bobot_simulasi'=> $value['sks_simulasi'],
-          'id_mk'=> $value['id_matkul'],
-          'kode_mk'=> $value['kode_mata_kuliah'],
-          'prodi_mk'=> $value['nama_program_studi'],
+   'kode_mk_kurikulum' => $key -1,
+            'kode_mk' => $value[''],
+            'kode_kurikulum' => $value[''],
+            'semester' => $value[''],
+            'status_mk' => $value[''],
+            'id_prodi_feeder' => $value[''],
+            'status_upload_mk_kurikulum' => $value[''],
+            'keterangan_upload_mk_kurikulum' => $value[''],
+
+        
+
+
    
           ]);
       }
@@ -42,17 +53,9 @@ if(isset($_POST["konek"]))
     else{
   foreach ($response['data'] as $key => $value) {
 
-         feeder_data_mata_kuliah::create([
-                'nama_mk'=> $value['nama_mata_kuliah'],
-          'jenis_mata_kuliah'=> $value['id_jenis_mata_kuliah'],
-          'bobot_mk'=> $value['sks_mata_kuliah'],
-          'bobot_tatap_muka'=> $value['sks_tatap_muka'],
-          'bobot_pratikum'=> $value['sks_praktek'],
-          'bobot_praktek_lapangan'=> $value['sks_praktek_lapangan'],
-          'bobot_simulasi'=> $value['sks_simulasi'],
-          'id_mk'=> $value['id_matkul'],
-          'kode_mk'=> $value['kode_mata_kuliah'],
-          'prodi_mk'=> $value['nama_program_studi'],
+         feeder_data_mk_kurikulum::create([
+         
+
    
           ]);
             }
@@ -94,51 +97,30 @@ if(isset($_POST["konek"]))
         <thead >
           <tr>
             <th style="text-align:center">No</th>
-            <th style="text-align:center">Kode</th>
-            <th style="text-align:center">Nama Mata Kuliah</th>
-            <th style="text-align:center">Bobot MK</th>                        
-            <th style="text-align:center">Jenis MK</th>                        
-            <th style="text-align:center">Prodi MK</th>                        
+            <th style="text-align:center">Kode MK</th>
+            <th style="text-align:center">Nama MK</th>                        
+            <th style="text-align:center">Bobot</th>                        
+            <th style="text-align:center">Jenis </th>                        
+            <th style="text-align:center">Nama Kurikulum</th>
+            <th style="text-align:center">Program Studi</th>
+            <th style="text-align:center">Semester</th>
             <th style="text-align:center">Status</th>
           </tr>
         </thead>
         <tbody>
           <tr>
 
-            @foreach($data_mata_kuliah as $key => $value)
+            @foreach($data_mk_kurikulum as $key => $value)
 
 
             <td >{{ $key + 1 }}</td>
-            <td  style="text-align:center">{{ $value['kode_mk'] }}</td>
-            <td  style="text-align:center">{{ $value['nama_mk'] }}</td>
-            <td  style="text-align:center">{{ $value['bobot_mk'] }}</td>
+            <td  style="text-align:center">{{ $value['nama_kurikulum'] }}</td>
+            <td  style="text-align:center">{{ $value['kode_jurusan'] }}</td>
+            <td  style="text-align:center">{{ $value['kode_thn_ajaran '] }}</td>
+            <td  style="text-align:center">{{ $value['jum_sks'] }}</td>
 
 
-            @if($value['id_jenis_mata_kuliah'] == "A")
-            <td  style="text-align:center">WAJIB PROGRAM STUDI</td>
-
-            @elseif($value['id_jenis_mata_kuliah'] == "B")
-
-            <td  style="text-align:center">PILIHAN</td>
-
-            @elseif($value['id_jenis_mata_kuliah'] == "C")
-
-            <td  style="text-align:center">PEMINATAN</td>
-
-            @elseif($value['id_jenis_mata_kuliah'] == "S")
-
-            <td  style="text-align:center">TUGAS AKHIR/SKRIPSI/TESIS/DISERTASI</td>
-
-            @else
-
-            <td  style="text-align:center">WAJIB NASIONAL</td>
-
-            @endif
-
-            <td  style="text-align:center">{{ $value['prodi_mk'] }}</td>
-        
-            @if($value['id_matkul'] != null)
-
+            @if($value['status'] == 1)
             <td  style="text-align:center">SUDAH ADA</td>
 
             @else
