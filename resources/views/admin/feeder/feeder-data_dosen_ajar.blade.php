@@ -156,16 +156,19 @@ $response = $data->runWS();
           </tr>
         </thead>
         <tbody>
+            <?php
+            $no = 1;
+            ?>
           <tr>
-
+          
             @foreach($data_dosen as $key => $value)
+            @if($value->data_mk_kurikulum !=null)          
+            @if( $value->data_mk_kurikulum->kurikulum->kode_thn_ajaran == '20201')
 
-
-
-            <td >{{ $key + 1 }}</td>
+            <td >{{ $no }}</td>
             <td  style="text-align:center">{{ $value['nama_mk'] }}</td>
             @if($value->data_mk !=null)
-            <td  style="text-align:center">{{ $value->data_mk }}</td>
+            <td  style="text-align:center">{{ $value->data_mk->bobot_mk }}</td>
             @else
             <td></td>
             @endif
@@ -187,7 +190,13 @@ $response = $data->runWS();
 
 
           </tr>
-
+          @else
+          @endif
+          @else
+          @endif
+          <?php
+          $no++;
+          ?>
           @endforeach
 
         </tbody>
