@@ -20,4 +20,7 @@ class feeder_data_mata_kuliah extends Model
           'kode_mk',
           'prodi_mk',
         ];
+    // public function kurikulum() {
+    //     return $this->belongsTo(feeder_data_kurikulum::class, 'kode_jurusan', 'id_prodi');
+    // }
 }

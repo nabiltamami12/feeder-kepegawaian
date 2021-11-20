@@ -25,6 +25,11 @@ class feeder_data_kelas extends Model
             'bahasan_case',
             'tgl_mulai_kelas',
             'tgl_selesai_kelas',
+            'sks_mata_kuliah',
             'keterangan_upload_kelas',
         ];
+
+    public function jurusan() {
+        return $this->belongsTo(feeder_jurusan::class, 'kode_jurusan', 'id_prodi');
+    }
 }

@@ -23,4 +23,10 @@ class feeder_data_dosen_ajar extends Model
             'keterangan',
             'id_aktifitas_mengajar',
         ];
+    public function data_mk_kurikulum() {
+        return $this->belongsTo(feeder_data_mk_kurikulum::class, 'kode_mk', 'kode_mk');
+    }
+    public function data_mk() {
+        return $this->belongsTo(feeder_data_mata_kuliah::class, 'nama_mk', 'nama_mk');
+    }
 }

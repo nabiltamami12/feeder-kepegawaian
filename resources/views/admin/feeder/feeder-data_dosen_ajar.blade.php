@@ -5,100 +5,109 @@
 <?php
 use App\Models\feeder\config_feeder;
 $token_id = config_feeder::first();
-
+use App\Models\feeder\feeder_data_kelas;
+use App\Models\feeder\feeder_data_dosen_ajar;
+$data_kelas = feeder_data_kelas::all();
 // $data = new \App\Services\FeederDiktiApiService("GetProfilPT");
 
-$data = new \App\Services\FeederDiktiApiService('GetDosenPengajarKelasKuliah');
-$token = $data->getToken();
-   config_feeder::where('id',$token_id->id)->update([
-            'token' => $token['data']['token'],
- 
-        ]);
-$data->runWS();
-$response = $data->runWS();
+
+
 
   // dd($token);
-  dd($response['data'] );
-  "id_aktivitas_mengajar" => "001c8f4d-d468-4af4-a793-7e113a5f1c5f"
-    "id_registrasi_dosen" => "806408d2-a2c1-42af-a0d3-316b1308b30a"
-    "id_dosen" => "d558ecde-84ae-4a0f-8a86-4f52b5f66274"
-    "nidn" => "0710126901"
-    "nama_dosen" => "RIO SUDIRMAN"
-    "id_kelas_kuliah" => "61ab1c1f-755f-4919-acae-813fb24c84b8"
-    "nama_kelas_kuliah" => "02"
-    "id_substansi" => null
-    "sks_substansi_total" => "3.00"
-    "rencana_minggu_pertemuan" => "14"
-    "realisasi_minggu_pertemuan" => "14"
-    "id_jenis_evaluasi" => "1"
-    "nama_jenis_evaluasi" => "Evaluasi Akademik"
-    "id_prodi" => "e48035e4-b3b4-489b-a01e-5f7ca23d5869"
-    "id_semester" => "20141"
+  // dd($response['data'] );
+  // "id_aktivitas_mengajar" => "001c8f4d-d468-4af4-a793-7e113a5f1c5f"
+  //   "id_registrasi_dosen" => "806408d2-a2c1-42af-a0d3-316b1308b30a"
+  //   "id_dosen" => "d558ecde-84ae-4a0f-8a86-4f52b5f66274"
+  //   "nidn" => "0710126901"
+  //   "nama_dosen" => "RIO SUDIRMAN"
+  //   "id_kelas_kuliah" => "61ab1c1f-755f-4919-acae-813fb24c84b8"
+  //   "nama_kelas_kuliah" => "02"
+  //   "id_substansi" => null
+  //   "sks_substansi_total" => "3.00"
+  //   "rencana_minggu_pertemuan" => "14"
+  //   "realisasi_minggu_pertemuan" => "14"
+  //   "id_jenis_evaluasi" => "1"
+  //   "nama_jenis_evaluasi" => "Evaluasi Akademik"
+  //   "id_prodi" => "e48035e4-b3b4-489b-a01e-5f7ca23d5869"
+  //   "id_semester" => "20141"
 
-$data_data_dosen = feeder_data_dosen::all();
-
-
-
-
-
+$data_dosen = feeder_data_dosen_ajar::all();
       
 if(isset($_POST["konek"]))
 {
+  $data = new \App\Services\FeederDiktiApiService('GetDosenPengajarKelasKuliah');
+$token = $data->getToken();
+   config_feeder::where('id',$token_id->id)->update([
+            'token' => $token['data']['token'],
+        ]);
+$data->runWS();
+$response = $data->runWS();
         set_time_limit(600);
 
-    if (feeder_data_dosen::all()->count() >= 1 ){
-  foreach ($response['data'] as $key => $value) {
+    if (feeder_data_dosen_ajar::all()->count() >= 1 ){
 
+  foreach ($response['data'] as $key => $value) {
+  foreach ($data_kelas as $key_kelas => $value_kelas) {
+
+  if ($value['id_prodi'] == $value_kelas['kode_jurusan']) {
+   
   
 
-        feeder_data_dosen::where('id',1)->update([
+        feeder_data_dosen_ajar::where('id',$key)->update([
 
             'semester' => $value['id_semester'],
             'nidn' => $value['nidn'],
             'nama_dosen' => $value['nama_dosen'],
-            'kode_mk' => $value[''],
-            'nama_mk' => $value[''],
-            'nama_kelas' => $value[''],
-            'rencana_tatap_muka' => $value[''],
-            'tatap_muka_real' => $value[''],
-            'kode_jurusan' => $value[''],
-            'sks_ajar' => $value[''],
-            'status_error' => $value[''],
-            'keterangan' => $value[''],
-            'id_aktifitas_mengajar' => $value[''],,
+            'kode_mk' => $value_kelas['kode_mk'],
+            'nama_mk' => $value_kelas['nama_mk'],
+            'nama_kelas' => $value_kelas['nama_kelas'],
+            'rencana_tatap_muka' => '0',
+            'tatap_muka_real' => '0',
+            'kode_jurusan' => $value_kelas['kode_jurusan'],
+            'sks_ajar' => $value['sks_substansi_total'],
+            'status_error' => '0',
+            'keterangan' => '0',
+            'id_aktifitas_mengajar' => $value['id_aktivitas_mengajar'],
+          ]);
+
 
         
-
-
-   
-          ]);
+        }
+       }
       }
     }
     else{
   foreach ($response['data'] as $key => $value) {
 
-         feeder_data_dosen::create([
-         
-            'nip' => $value['nidn'],
+  foreach ($data_kelas as $key_kelas => $value_kelas) {
+
+  if ($value['id_prodi'] == $value_kelas['kode_jurusan']) {
+   
+  
+
+        feeder_data_dosen_ajar::create([
+
+            'semester' => $value['id_semester'],
             'nidn' => $value['nidn'],
             'nama_dosen' => $value['nama_dosen'],
-            'kelamin' => $value['jenis_kelamin'],
-            'agama' => $value['nama_agama'],
-            'tmpt_lahir' => '',
-            'tgl_lahir' => $value['tanggal_lahir'],
-            'id_status_dosen' => $value['id_status_aktif'],
-            'email' => '',
-            'telp' => '',
-            'alamat' => '',
-            'foto_dosen' => 'default.jpg',
-            'id_dosen_feeder' => $value['id_dosen'],
-   
+            'kode_mk' => $value_kelas['kode_mk'],
+            'nama_mk' => $value_kelas['nama_mk'],
+            'nama_kelas' => $value_kelas['nama_kelas'],
+            'rencana_tatap_muka' => '0',
+            'tatap_muka_real' => '0',
+            'kode_jurusan' => $value_kelas['kode_jurusan'],
+            'sks_ajar' => $value['sks_substansi_total'],
+            'status_error' => '0',
+            'keterangan' => '0',
+            'id_aktifitas_mengajar' => $value['id_aktivitas_mengajar'],
           ]);
-            }
-        
-     
-  }
-}
+ 
+       }
+      }
+     }  
+    }
+   }
+
 ?>
 
 
@@ -119,7 +128,10 @@ if(isset($_POST["konek"]))
           </div>
           <div class="col text-right">
 
-           <!--          <button type="button" onclick="add_btn()" class="btn btn-primary "><i class="iconify-inline mr-1" data-icon='bx:bx-plus-circle'></i>Tambah</button> -->
+         <form role="form" action="" method="POST">
+                @csrf
+                  <button type="submit" name="konek" class="btn btn-sm btn-flat btn-default"><i class="fa fa-cloud-download"></i> DOWNLOAD FEEDER</button>
+              </form>
 
          </div>
        </div>
@@ -132,37 +144,45 @@ if(isset($_POST["konek"]))
         <thead >
           <tr>
             <th style="text-align:center">No</th>
-            <th style="text-align:center">NIP</th>
-            <th style="text-align:center">NIDN</th>
+            <th style="text-align:center">Nama MK</th>
+            <th style="text-align:center">SKS MK</th>
+            <th style="text-align:center">Kelas</th>
+            <th style="text-align:center">Jurusan</th>
+            <th style="text-align:center">THN Ajar</th>
             <th style="text-align:center">Nama Dosen</th>
-            <th style="text-align:center">Telp</th>
+            <th style="text-align:center">SKS Dosen</th>
             <th style="text-align:center">Status</th>
-            <th style="text-align:center">Status</th>
+
           </tr>
         </thead>
         <tbody>
           <tr>
 
-            @foreach($response['data'] as $key => $value)
+            @foreach($data_dosen as $key => $value)
+
 
 
             <td >{{ $key + 1 }}</td>
-            <td  style="text-align:center">{{ $value['nip'] }}</td>
-            <td  style="text-align:center">{{ $value['nidn'] }}</td>
-            <td  style="text-align:center">{{ $value['nama_dosen'] }}</td>
-            <td  style="text-align:center"> - </td>
-            <td  style="text-align:center">{{ $value['nama_status_aktif'] }}</td>
-
-        
-            @if($value['id_dosen'] != null)
-
-            <td  style="text-align:center">SUDAH ADA</td>
-
+            <td  style="text-align:center">{{ $value['nama_mk'] }}</td>
+            @if($value->data_mk !=null)
+            <td  style="text-align:center">{{ $value->data_mk }}</td>
             @else
-
-            <td  style="text-align:center">BELUM ADA</td>
-
+            <td></td>
             @endif
+            <td  style="text-align:center">{{ $value['nama_kelas'] }}</td>
+            @if($value->data_mk !=null)          
+            <td  style="text-align:center">{{ $value->data_mk->prodi_mk }}</td>
+            @else
+            <td></td>
+            @endif
+            @if($value->data_mk_kurikulum !=null)          
+            <td  style="text-align:center"> {{$value->data_mk_kurikulum->kurikulum->kode_thn_ajaran}} </td>
+            @else
+            <td>{{$value->data_mk_kurikulum}}</td>
+            @endif
+            <td  style="text-align:center">{{ $value['nama_dosen'] }}</td>
+            <td  style="text-align:center">{{ $value['sks_ajar'] }}</td>      
+            <td> - </td>
 
 
 

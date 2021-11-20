@@ -30,6 +30,7 @@ class CreateFeederDataKelasTable extends Migration
             $table->string('bahasan_case')->nullable();
             $table->string('tgl_mulai_kelas')->nullable();
             $table->string('tgl_selesai_kelas')->nullable();
+            $table->string('sks_mata_kuliah')->nullable();
             $table->string('keterangan_upload_kelas')->nullable();
             $table->timestamps();
         });
