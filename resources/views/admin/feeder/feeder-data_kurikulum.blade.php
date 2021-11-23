@@ -115,7 +115,7 @@ if(isset($_POST["konek"]))
             <td  style="text-align:center">{{ $value['jum_sks'] }}</td>
 
 
-            @if($value['status'] == 1)
+            @if($value['id_kurikulum'] != null)
             <td  style="text-align:center">SUDAH ADA</td>
 
             @else

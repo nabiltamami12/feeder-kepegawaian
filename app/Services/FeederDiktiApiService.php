@@ -21,14 +21,18 @@ class FeederDiktiApiService {
         $this->act = $act;
     }
 
-    function getToken()
+   function getToken()
     {
+
+
         $client = new Client();
         $params = [
             "act" => "GetToken",
             "username" => $this->username,
             "password" => $this->password
         ];
+        
+
 
         $req = $client->post( $this->url, [
             'headers' => [
@@ -44,11 +48,10 @@ class FeederDiktiApiService {
         return $result;
 
     }
-
     public function runWS()
     {
-        set_time_limit(2000);
-        
+        set_time_limit(5000);
+
         $client = new Client();
         $params = [
             "act" => "GetToken",
@@ -74,19 +77,33 @@ class FeederDiktiApiService {
                 "token" => $token,
                 "act" => $this->act,
             ];
-
-            $req = $client->post( $this->url, [
+            
+            $req = $client->request('POST', $this->url, ['verify' => false, 
                 'headers' => [
                     'Content-Type' => 'application/json',
                     'Accept' => 'application/json',
                 ],
                 'body' => json_encode($params)
             ]);
-
+            
             $response = $req->getBody();
             $result = json_decode($response,true);
         }
-
+   // $params = [
+   //          "token" => $token->token,
+   //          "act" =>  $this->act,
+   //          "username" => $this->username,
+   //          "password" => $this->password
+   //      ];
+   //      $response = $client->request('POST', $this->url, ['verify' => false,
+   //         'headers' => [
+   //              'Content-Type' => 'application/json',
+   //              'Accept' => 'application/json',
+   //          ],
+   //          'body' => json_encode($params)
+   //     ]);
+   //      $result = json_decode($response->getBody());
+        // dd($result);
         return $result;
     }
 }

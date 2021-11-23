@@ -157,11 +157,10 @@ $response = $data->runWS();
 
             <td >{{ $key + 1 }}</td>
             <td  style="text-align:center">{{ $value['nama_mk'] }}</td>
-            <td  style="text-align:center">{{ $value['sks_mata_kuliah'] }}</td>
+            <td  style="text-align:center">{{ $value->sks_mata_kuliah }}</td>
             <td  style="text-align:center">{{ $value['nama_kelas'] }}</td>
             @if($value->jurusan != null)
 
-            <td  style="text-align:center"> {{$value->jurusan->nama_jurusan}} </td>
             <td  style="text-align:center"> {{$value->jurusan->nama_jurusan}} </td>
 
             @else
@@ -169,7 +168,7 @@ $response = $data->runWS();
             <td  style="text-align:center"></td>
 
             @endif
-
+            <td></td>
             @if($value['id_kelas_feeder'] != null)
 
             <td  style="text-align:center">SUDAH ADA</td>

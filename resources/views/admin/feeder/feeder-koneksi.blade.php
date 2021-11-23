@@ -13,8 +13,9 @@ $data->runWS();
 $response = $data->runWS();
 $token = $data->getToken();
 $data_config = config_feeder::all();
+$token_id = config_feeder::first();
 
-    # dd( $response['data'][0]);
+    // dd( $response['data']);
 
 
 $token = $token['data']['token'];
@@ -32,7 +33,7 @@ if(isset($_POST["konek"]))
 
   if (config_feeder::all()->count() > 0 ){
 
-      config_feeder::where('id',1)->update([
+      config_feeder::where('id',$token_id->id)->update([
             'username' => $_POST["username"],
             'password' => $_POST["password"],
             'url' => $_POST["url"],

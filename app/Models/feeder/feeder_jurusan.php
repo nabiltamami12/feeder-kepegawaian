@@ -25,4 +25,5 @@ class feeder_jurusan extends Model
         'created_at',
         'updated_at',
     ];
+    
 }

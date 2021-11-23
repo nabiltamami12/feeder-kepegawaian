@@ -27,6 +27,7 @@ class feeder_data_kelas extends Model
             'tgl_selesai_kelas',
             'sks_mata_kuliah',
             'keterangan_upload_kelas',
+            
         ];
 
     public function jurusan() {

@@ -865,5 +865,12 @@ Route::prefix('keuangan')->middleware(['aksesuntuk:keuangan'])->group(function (
     });
 });
 
+Route::get('feeder-dikti/{act}', function ($act) {
+    $data = new \App\Services\FeederDiktiApiService($act);
+    $data->runWS();
+    $response = $data->runWS();
+
+    dd( $response );
+});
 
 require_once(__DIR__.'/web_slicing.php');
