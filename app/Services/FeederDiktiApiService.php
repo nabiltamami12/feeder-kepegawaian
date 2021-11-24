@@ -18,6 +18,9 @@ class FeederDiktiApiService {
         $this->url = env('feeder_url');
         $this->username = env('feeder_username');
         $this->password = env('feeder_password');
+        // $this->url = "http://103.92.209.60:8082/ws/live2.php";
+        // $this->username = "005035";
+        // $this->password = "KM13banyuwangi";
         $this->act = $act;
     }
 

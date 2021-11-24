@@ -6,11 +6,11 @@
 $data = new \App\Services\FeederDiktiApiService('GetListPerkuliahanMahasiswa');
 $data->runWS();
 $response = $data->runWS();
-use App\Models\feeder\feeder_data_dosen;
+use App\Models\feeder\feeder_data_akm;
 
-$data_data_dosen = feeder_data_dosen::all();
+$data_data_dosen = feeder_data_akm::all();
 
-  dd($response['data'][0] );
+  // dd($response['data'][0] );
 
     // "id_registrasi_mahasiswa" => "10f3bbd8-cfb9-4acf-a8d3-885460841b87"
     // "nim" => "31144762"
@@ -30,30 +30,29 @@ $data_data_dosen = feeder_data_dosen::all();
     // "biaya_kuliah_smt" => "0.00"
 
       
-if(isset($_POST["konek"]))
-{
+// if(isset($_POST["konek"]))
+// {
         set_time_limit(600);
 
-    if (feeder_data_dosen::all()->count() >= 1 ){
+    if (feeder_data_akm::all()->count() >= 1 ){
   foreach ($response['data'] as $key => $value) {
 
   
 
-        feeder_data_dosen::where('id',1)->update([
+        feeder_data_akm::where('id',1)->update([
 
-            'nip' => $value['nidn'],
-            'nidn' => $value['nidn'],
-            'nama_dosen' => $value['nama_dosen'],
-            'kelamin' => $value['jenis_kelamin'],
-            'agama' => $value['nama_agama'],
-            'tmpt_lahir' => '',
-            'tgl_lahir' => $value['tanggal_lahir'],
-            'id_status_dosen' => $value['id_status_aktif'],
-            'email' => '',
-            'telp' => '',
-            'alamat' => '',
-            'foto_dosen' => 'default.jpg',
-            'id_dosen_feeder' => $value['id_dosen'],
+          'semester' => $value['id_semester'],
+            'nim' => $value['nim'],
+            'nama' => $value['nama_mahasiswa'],
+            'ips' => $value['ips'],
+            'ipk' => $value['ipk'],
+            'sks_smt' => $value['sks_semester'],
+            'sks_total' => $value['sks_total'],
+            'kode_jurusan' => $value['id_prodi'],
+            'status_kuliah' => $value['id_status_mahasiswa'],
+            'status_error' => '0',
+            'valid' => '0',
+            'keterangan' => '',
 
         
 
@@ -65,28 +64,28 @@ if(isset($_POST["konek"]))
     else{
   foreach ($response['data'] as $key => $value) {
 
-         feeder_data_dosen::create([
+         feeder_data_akm::create([
          
-            'nip' => $value['nidn'],
-            'nidn' => $value['nidn'],
-            'nama_dosen' => $value['nama_dosen'],
-            'kelamin' => $value['jenis_kelamin'],
-            'agama' => $value['nama_agama'],
-            'tmpt_lahir' => '',
-            'tgl_lahir' => $value['tanggal_lahir'],
-            'id_status_dosen' => $value['id_status_aktif'],
-            'email' => '',
-            'telp' => '',
-            'alamat' => '',
-            'foto_dosen' => 'default.jpg',
-            'id_dosen_feeder' => $value['id_dosen'],
+            'semester' => $value['id_semester'],
+            'nim' => $value['nim'],
+            'nama' => $value['nama_mahasiswa'],
+            'ips' => $value['ips'],
+            'ipk' => $value['ipk'],
+            'sks_smt' => $value['sks_semester'],
+            'sks_total' => $value['sks_total'],
+            'kode_jurusan' => $value['id_prodi'],
+            'status_kuliah' => $value['id_status_mahasiswa'],
+            'status_error' => '0',
+            'valid' => '0',
+            'keterangan' => '',
+
    
           ]);
             }
         
      
   }
-}
+// }
 ?>
 
 <!-- Header -->
@@ -120,47 +119,38 @@ if(isset($_POST["konek"]))
         <thead >
           <tr>
             <th style="text-align:center">No</th>
-            <th style="text-align:center">NIP</th>
-            <th style="text-align:center">NIDN</th>
-            <th style="text-align:center">Nama Dosen</th>
-            <th style="text-align:center">Telp</th>
-            <th style="text-align:center">Status</th>
-            <th style="text-align:center">Status</th>
+            <th style="text-align:center">NIM</th>
+            <th style="text-align:center">NAMA MAHASISWA</th>
+            <th style="text-align:center">JURUSAN</th>
+            <th style="text-align:center">SEMESTER</th>
+            <th style="text-align:center">STS AKM</th>
+            <th style="text-align:center">STS</th>
+            <th style="text-align:center">IPS</th>
+            <th style="text-align:center">IPK</th>
+            <th style="text-align:center">STATUS</th>
+            <th style="text-align:center">KETERANGAN</th>
           </tr>
         </thead>
         <tbody>
           <tr>
 
-            @foreach($data_data_dosen as $key => $value)
+
+NO. NIM NAMA MAHASISWA  JURUSAN SEMESTER  STS AKM STS IPS IPK STATUS  KETERANGAN            @foreach($data_data_dosen as $key => $value)
 
 
             <td >{{ $key + 1 }}</td>
-            <td  style="text-align:center">{{ $value['nip'] }}</td>
-            <td  style="text-align:center">{{ $value['nidn'] }}</td>
-            <td  style="text-align:center">{{ $value['nama_dosen'] }}</td>
+            <td  style="text-align:center">{{ $value['nim'] }}</td>
+            <td  style="text-align:center">{{ $value['nama'] }}</td>
             <td  style="text-align:center"> - </td>
+            <td  style="text-align:center"> - </td>
+            <td  style="text-align:center"> - </td>
+            <td  style="text-align:center"> - </td>
+            <td  style="text-align:center"> {{ $value['ips'] }} </td>
+            <td  style="text-align:center"> {{ $value['ipk'] }} </td>
+            <td  style="text-align:center"> {{ $value['status_kuliah'] }} </td>
+            <td  style="text-align:center"> SUKSES </td>
 
-          @if($value['id_status_dosen'] == 1)
-
-            <td  style="text-align:center">AKTIF</td>
-       
-            @else
-
-            <td  style="text-align:center"></td>
-
-            @endif
-
-            @if($value['id_dosen_feeder'] != null)
-
-            <td  style="text-align:center">SUDAH ADA</td>
-
-            @else
-
-            <td  style="text-align:center">BELUM ADA</td>
-
-            @endif
-
-
+          
 
           </tr>
 
