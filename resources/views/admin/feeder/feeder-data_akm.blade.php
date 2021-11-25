@@ -30,8 +30,8 @@ $data_data_dosen = feeder_data_akm::all();
     // "biaya_kuliah_smt" => "0.00"
 
       
-// if(isset($_POST["konek"]))
-// {
+if(isset($_POST["konek"]))
+{
         set_time_limit(600);
 
     if (feeder_data_akm::all()->count() >= 1 ){
@@ -85,7 +85,7 @@ $data_data_dosen = feeder_data_akm::all();
         
      
   }
-// }
+}
 ?>
 
 <!-- Header -->
@@ -135,19 +135,62 @@ $data_data_dosen = feeder_data_akm::all();
           <tr>
 
 
-NO. NIM NAMA MAHASISWA  JURUSAN SEMESTER  STS AKM STS IPS IPK STATUS  KETERANGAN            @foreach($data_data_dosen as $key => $value)
+           @foreach($data_data_dosen as $key => $value)
 
+           @php
+          if($value["status_error"] == 2) 
+            {
+              $stsfeeder = "SUKSES";
+            }
+            else if($value["status_error"] == 1) 
+            {
+              $stsfeeder = "GAGAL KIRIM";
+            }
+            else
+            {
+              $stsfeeder = "BELUM ADA";
+            }
+            
+            //STS
+            if($value["status_kuliah"] == "C")
+            {
+              $sts = "CUTI";
+            }
+            else if($value["status_kuliah"] == "N")
+            {
+              $sts = "NON-AKTIF";
+            }
+            else if($value["status_kuliah"] == "G")
+            {
+              $sts = "SEDANG DOUBLE DEGREE";
+            }
+            else
+            {
+              $sts = "AKTIF";
+            }
+
+            @endphp
 
             <td >{{ $key + 1 }}</td>
             <td  style="text-align:center">{{ $value['nim'] }}</td>
             <td  style="text-align:center">{{ $value['nama'] }}</td>
+            @if($value->jurusan != null)
+            <td  style="text-align:center"> {{ $value->jurusan->kode_jurusan }} - {{ $value->jurusan->nama_jurusan }} - {{ $value->jurusan->program }}</td>
+            @else
             <td  style="text-align:center"> - </td>
+            @endif
             <td  style="text-align:center"> - </td>
-            <td  style="text-align:center"> - </td>
-            <td  style="text-align:center"> - </td>
+            <td  style="text-align:center"> {{ $sts }} </td>
+            <td  style="text-align:center"> {{ $value['status_kuliah'] }} </td>
             <td  style="text-align:center"> {{ $value['ips'] }} </td>
             <td  style="text-align:center"> {{ $value['ipk'] }} </td>
-            <td  style="text-align:center"> {{ $value['status_kuliah'] }} </td>
+            @if($stsfeeder == "SUKSES")
+            <td  style="text-align:center"> <span class='label label-success'>SUKSES</label></td>
+            @elseif($stsfeeder == "GAGAL KIRIM")
+              <td  style="text-align:center"> <span class='label label-warning'>GAGAL KIRIM</label></td>
+            @else
+              <td  style="text-align:center"> <span class='label label-danger'>BELUM ADA</label></td>
+            @endif
             <td  style="text-align:center"> SUKSES </td>
 
           

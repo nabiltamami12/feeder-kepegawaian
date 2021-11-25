@@ -22,4 +22,7 @@ class feeder_data_akm extends Model
             'valid',
             'keterangan',
         ];
+        public function jurusan() {
+        return $this->belongsTo(feeder_jurusan::class, 'kode_jurusan', 'id_prodi');
+    }
 }
